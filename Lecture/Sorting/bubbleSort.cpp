@@ -33,10 +33,12 @@ int main()
     }
 
 //    std::sort(angka, angka + 10);
-    for(int i = 0; i < 10; i++)
+    Bubble(angka, N);
+    for(int i = 0; i < 100; i++)
     {
-        printf("%d\n", angka[i]);
+        printf("%d ", angka[i]);
     }
+    printf("\n");
 
     return 0;
 }
