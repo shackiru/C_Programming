@@ -12,6 +12,8 @@ void Swap(int *a, int *b)
 
 void Bubble(int arr[], int n)
 {
+    int a = 0;
+    int flag = 0;
     for(int i = 0; i < n - 1; i++)
     {
         for(int j = 0; j < n - 1; j++)
@@ -19,7 +21,13 @@ void Bubble(int arr[], int n)
             if(arr[j] > arr[j + 1])
             {
                 Swap(&arr[j], &arr[j + 1]);
+                flag = 1;
             }
+            a++;
+        }
+        if(flag == 0)
+        {
+            break;
         }
     }
 }
