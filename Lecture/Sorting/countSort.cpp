@@ -2,9 +2,29 @@
 #include <stdlib.h>
 #include <time.h>
 
-void Counting(int arr[], int n)
+void Counting(int arr[], int n, int k)
 {
-	
+	int count[k+5];
+
+    for(int i = 0; i <= k; i++)
+    {
+        count[i] = 0;
+    }
+
+    for(int i = 0; i < n; i++)
+    {
+        count[arr[i]]++;    
+    }
+
+    int x = 0;
+    for(int i = 0; i <= k; i++)
+    {
+        for(int j = 0; j < count[i]; j++)
+        {
+            arr[x] = i;
+            x++;
+        }
+    }
 }
 
 int main()
@@ -19,6 +39,12 @@ int main()
 		printf("%d ", num[i]);
 	}
 	printf("\n");
+    Counting(num, 1000, 100);
+    for(int i = 0; i < 1000; i++)
+    {
+        printf("%d ", num[i]);
+    }
+    printf("\n");
 
     return 0;
 }
