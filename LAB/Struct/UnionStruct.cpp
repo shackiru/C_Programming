@@ -1,15 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 
-//struct Book
-//{
-//    int id = 1234;
-//    char title[55] = "Genshin Impact";
-//    char genre[55] = "Fantasy";
-//    int quantity = 10;
-//    double price = 19.3;
-//}newBook;
-
 struct Book
 {
     int id;

@@ -3,6 +3,7 @@
 
 union Genre
 {
+    int id;
     char name[55];
     char description[105];
 }newGenre, oldGenre;
@@ -16,12 +17,19 @@ struct Book
     double price;
 };
 
+struct Connection
+{
+
+};
+
 int main()
 {
     Genre genre = {"Horror"};
     printf("Genre Detail\n");
     printf("======================\n");
     printf("Name: %s\n", genre.name);
+
+    strcpy(genre.description, "This is a horror genre");
     printf("Description : %s\n", genre.description);
 
     return 0;
