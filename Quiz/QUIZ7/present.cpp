@@ -6,11 +6,12 @@ int main()
 	int amountCase;
 	int count = 0;
 	int present = 0;
-	int compare = 0;
 	
 	scanf("%d", &testCase);
 	for(int tc = 0; tc < testCase; tc++)
 	{
+		int compare = 0;
+		
 		scanf("%d", &amountCase);
 		for(int i = 0; i < amountCase; i++)
 		{
@@ -26,6 +27,7 @@ int main()
 			}
 		}
 		printf("Case #%d: %d\n", tc + 1, count);
+		count = 0;
 	}
 	return 0;
 }
