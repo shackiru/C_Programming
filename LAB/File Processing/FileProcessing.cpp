@@ -53,12 +53,75 @@ void addData()
 	strcpy(major[index], inputMajor);
 	index++;
 	
+	printf("Add Data Successful!\n");
+}
+
+void updateData()
+{
+	int inputUpdate;
+	
+	do
+	{
+		printf("Enter Data to Update [1 - %d]:", index);
+		scanf("%d", &inputUpdate);
+		getchar();
+	}
+	while(inputUpdate < 1 || inputUpdate > index);
+	
+	char inputName[30];
+	int inputScore;
+	char inputMajor[50];
+    
+	do
+	{
+		printf("Enter Your Name[1-50 Characters]:");
+		scanf("%[^\n]", inputName);
+		getchar();
+	}
+	while(strlen(inputName) < 1 || strlen(inputName) > 50);
+	
+	do
+	{
+		printf("Enter Your Score [1-100]:");
+		scanf("%d", &inputScore);
+		getchar();
+	}
+	while(inputScore < 1 || inputScore > 100);
+	
+	do
+	{
+		printf("Enter Your Major[1-50 Characters]:");
+		scanf("%[^\n]", inputMajor);
+		getchar();
+	}
+	while(strlen(inputMajor) < 1 || strlen(inputMajor) > 50);
+	
+	strcpy(name[inputUpdate - 1], inputName);
+	score[inputUpdate - 1] = inputScore;
+	strcpy(major[inputUpdate - 1], inputMajor);
+	
+	printf("Data update success!\n\n");
+}
+
+void exitProgram()
+{
+	FILE *fp = fopen("Result.csv", "w");
+	
+	int i = 0;
+	while(i < index)
+	{
+		fprintf(fp, "%s, %d, %s\n", name[i], score[i], major[i]);
+        i++;
+	}
+    fclose(fp);
+    printf("Thank you for using this program\n\n");
+    
+    exit(0);
 }
 
 void mainMenu()
 {
 	int input = -1;
-	
 	
 	do
 	{
@@ -88,6 +151,7 @@ void mainMenu()
 				
 			case 3:
 			{
+				updateData();
 				break;
 			}
 				
@@ -98,25 +162,12 @@ void mainMenu()
 			
 			case 5:
 			{
+				exitProgram();
 				break;
 			}
 		}
 	}
 	while(true);
-}
-
-void exitProgram()
-{
-	FILE *fp = fopen("Result.csv", "w");
-	
-	int i = 0;
-	while(i < index)
-	{
-		fprintf(fp, "%s, %d, %s\n", name[i], score[i], major[i]);
-        i++;
-	}
-    fclose(fp);
-    printf("Thank you for using this program\n");
 }
 
 int main()
