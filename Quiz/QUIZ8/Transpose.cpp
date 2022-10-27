@@ -5,7 +5,7 @@ int main()
 	int size;
 	int matrix[105][105];
 	int transpose[105][105];
-	
+		
 	scanf("%d", &size);
 	for(int tc = 0; tc < size; tc++)
 	{
