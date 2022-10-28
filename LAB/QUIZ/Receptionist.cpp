@@ -36,6 +36,7 @@ void readFile()
         fscanf(fp, "%[^#]#%[^#]#%d\n", visitorArr[size].id, visitorArr[size].name, &visitorArr[size].age );
         size++;
     }
+    fclose(fp);
 }
 
 void addData()
@@ -152,6 +153,11 @@ void mergeSort(int left, int right)
 	}
 }
 
+void quickSort()
+{
+	
+}
+
 void viewData()
 {
     mergeSort(0, size - 1);
@@ -182,7 +188,7 @@ void deleteData()
 	}
 	while(inputDelete < 1 || inputDelete > size);
 	
-	for(int i = inputIndex - 1; i < size - 1; i++)
+	for(int i = inputDelete - 1; i < size - 1; i++)
 	{
 		visitorArr[i] = visitorArr[i + 1];
 	}
@@ -197,7 +203,13 @@ void deleteData()
 
 void saveData()
 {
-	
+	FILE *f = fopen("visitors.txt", "w");
+	for(int i = 0; i < size; i++)
+	{
+		fprintf(f, "%s#%s#%d\n", visitorArr[i].id, visitorArr[i].name, visitorArr[i].age);
+	}
+	fclose(f);
+	exit(0);
 }
 
 void mainMenu()
@@ -219,29 +231,29 @@ void mainMenu()
 		switch(input)
 		{
 			case 1:
-				{
-					addData();
-					break;
-				}
+			{
+				addData();
+				break;
+			}
 			case 2:
-				{
-					viewData();
-					break;
-				}
+			{
+				viewData();
+				break;
+			}
 			case 3:
-				{
-					deleteData();
-					break;	
-				}
+			{
+				deleteData();
+				break;	
+			}
 			case 4:
-				{
-					saveData();
-					break;
-				}
+			{
+				saveData();
+				break;
+			}
 			default:
-				{
-					printf("Invalid Input\n");
-				}
+			{
+				printf("Invalid Input\n");
+			}
 		}
 	}
 }
