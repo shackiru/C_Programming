@@ -7,7 +7,7 @@ struct Visitor
 {
     char id[7];
     char name[105];
-    int age[105];
+    int age;
 
 };
 
@@ -80,11 +80,82 @@ void addData()
 	printf("Name: %s\n", visitorName);
 	printf("Age: %d\n", visitorAge);
 	printf("ID: %s\n", visitorID);
+
+    strcpy(visitorArr[size].id, visitorID);
+    strcpy(visitorArr[size].name, visitorName);
+    visitorArr[size].age = visitorAge;
+    size++;
+    
+    printf("Visitor Has Been Updated!\n");
+}
+
+void merge(int left, int mid, int right)
+{
+	int sizeLeft = mid - left + 1;
+	int sizeRight = right - mid;
+	
+	Visitor leftArr[sizeLeft];
+	Visitor rightArr[sizeRight];
+	
+	for(int i = 0; i < sizeLeft; i++)
+	{
+		leftArr[i] = visitorArr[left + i];
+	}
+	
+	for(int j = 0; j < sizeRight; j++)
+	{
+		rightArr[j] = visitorArr[mid + j + 1];
+	}
+	
+	int indexLeft = 0;
+	int indexRight = 0;
+	int indexArray = left;
+	
+	while(indexLeft < sizeLeft && indexRight < sizeRight)
+	{
+		if(strcmp(leftArr[indexLeft].id, rightArr[indexRight].id) <= 0)
+		{
+			visitorArr[indexArray] = leftArr[indexLeft];
+			indexLeft++;
+		}
+		else
+		{
+			visitorArr[indexArray] = rightArr[indexRight];
+			indexRight++;
+		}
+		indexArray++;
+	}
+	
+	while(indexLeft < sizeLeft)
+	{
+		visitorArr[indexArray] = leftArr[indexLeft];
+		indexLeft++;
+		indexArray++;
+	}
+	
+	while(indexLeft < sizeLeft)
+	{
+		visitorArr[indexArray] = rightArr[indexRight];
+		indexRight++;
+		indexRight++;
+	}
+}
+
+void mergeSort(int left, int right)
+{
+	if(left < right)
+	{
+		int mid = (left + right) / 2;
+		mergeSort(left, mid);
+		mergeSort(mid + 1, right);
+		merge(left, mid, right);
+	}
 }
 
 void viewData()
 {
-
+    mergeSort(0, size - 1);
+	displayAll();
 }
 
 void deleteData()
@@ -148,7 +219,7 @@ int main()
 {
     srand(time(0));
     readFile();
-    displayAll();
+    //displayAll();
     mainMenu();
 
     return 0;

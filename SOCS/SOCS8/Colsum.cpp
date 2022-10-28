@@ -11,6 +11,7 @@ int main()
 	for(int tc = 0; tc < testCase; tc++)
 	{
 		scanf("%d", &amountCase);
+		sum = 0;
 		for(int i = 0; i < amountCase; i++)
 		{
 			for(int j = 0; j < amountCase; j++);
@@ -18,7 +19,15 @@ int main()
 				scanf("%d", &count[i][j]);	
 			}
 		}
-		printf("%d", sum);
+		for(int i = 0; i < amountCase; i++)
+		{
+			for(int j = 0; j < amountCase; j++)
+			{
+
+			}
+		}
+
+		printf("Case #%d: %d\n", sum);
 	}
 	
 	return 0;
