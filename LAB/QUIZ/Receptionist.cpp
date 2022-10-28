@@ -160,7 +160,39 @@ void viewData()
 
 void deleteData()
 {
-
+	if(size == 0)
+	{
+		printf("No data to delete!\n");
+		return;
+	}
+	
+	mergeSort(0, size - 1);
+	displayAll();
+	
+	int inputDelete;
+	do
+	{
+		printf("Input Index to Delete [1 - %d]: ", size);
+		scanf("%d", &inputDelete);
+		if(inputDelete < 1 || inputDelete > size)
+		{
+			printf("Invalid Number!\n");
+		}
+		getchar();
+	}
+	while(inputDelete < 1 || inputDelete > size);
+	
+	for(int i = inputIndex - 1; i < size - 1; i++)
+	{
+		visitorArr[i] = visitorArr[i + 1];
+	}
+	
+	strcpy(visitorArr[size - 1].id, "");
+	strcpy(visitorArr[size - 1].name, "");
+	visitorArr[size - 1].age = 0;
+	
+	size--;
+	printf("Visitor Has Been Deleted!\n");
 }
 
 void saveData()

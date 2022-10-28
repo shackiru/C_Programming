@@ -14,20 +14,22 @@ int main()
 		sum = 0;
 		for(int i = 0; i < amountCase; i++)
 		{
-			for(int j = 0; j < amountCase; j++);
+			for(int j = 0; j < amountCase; j++)
 			{
 				scanf("%d", &count[i][j]);	
 			}
 		}
+		printf("Case #%d:", tc + 1);
 		for(int i = 0; i < amountCase; i++)
 		{
 			for(int j = 0; j < amountCase; j++)
 			{
-
+				sum = sum + count[j][i];
 			}
+			printf(" %d", sum);
+			sum = 0;
 		}
-
-		printf("Case #%d: %d\n", sum);
+		printf("\n");	
 	}
 	
 	return 0;
