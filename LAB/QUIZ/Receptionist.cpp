@@ -153,14 +153,58 @@ void mergeSort(int left, int right)
 	}
 }
 
-void quickSort()
+void swap(Visitor *a, Visitor *b)
 {
+	Visitor temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
+int partition(int low, int high)
+{
+	char pivot [10];
 	
+	strcpy(pivot, visitorArr[low].id);
+	int leftToRight = low; // i lebih besar dari pivot
+	int rightToLeft = high; // j lebih kecil dari pivot
+	
+	while(leftToRight < rightToLeft)
+	{
+		do
+		{
+			leftToRight++;
+		}
+		while(strcmp(visitorArr[leftToRight].id, pivot) <= 0);
+		
+		do
+		{
+			rightToLeft--;
+		}
+		while(strcmp(visitorArr[rightToLeft].id, pivot) > 0);
+		
+		if(leftToRight < rightToLeft)
+		{
+			swap(&visitorArr[leftToRight], &visitorArr[rightToLeft]);
+		}
+	}
+	swap(&visitorArr[low], &visitorArr[rightToLeft]);
+	return rightToLeft;
+}
+
+void quickSort(int low, int high)
+{
+	if(low < high)
+	{
+		int pivot = (partition(low, high));
+		quickSort(low, pivot - 1	);
+		quickSort(pivot + 1, high);
+	}
 }
 
 void viewData()
 {
-    mergeSort(0, size - 1);
+    quickSort(0, size);
+    //mergeSort(0, size - 1);
 	displayAll();
 }
 
