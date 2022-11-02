@@ -41,7 +41,7 @@ void merge(int *arr, int left, int mid, int right)
         arr[indexArray++] = temp[indexLeft++];
     }
 
-    while(indexRight <= right - mid)
+    while(indexRight <= right - left)
     {
         arr[indexArray++] = temp[indexRight++];
     }
@@ -65,6 +65,13 @@ int main()
     {
         arr[i] = rand() % 1000 + 1;
     }
+    mergeSort(arr, 0, n - 1);
+
+    for(int i = 0; i < n; i++)
+    {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
 
     return 0;
 }
