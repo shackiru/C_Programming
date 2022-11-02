@@ -10,6 +10,10 @@ void swap(int *a, int *b)
 
 int partition(int *arr, int low, int high)
 {
+    int x = (rand() % (high - low + 1)) + low;
+
+    swap(&arr[low], &arr[x]);
+    
     int pivot = arr[low];
     int index = low + 1;
 
@@ -44,7 +48,7 @@ int main()
         arr[i] = rand() % 1000 + 1;
     }
 
-    quickSort(arr, 0, 999);
+    quickSort(arr, 0, 1000 - 1);
 
     for(int i = 0; i < 1000; i++)
     {
