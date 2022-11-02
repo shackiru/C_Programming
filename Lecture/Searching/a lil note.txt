@@ -1,0 +1,7 @@
+linear -> n
+binary -> log2(n)
+
+quick -> n * log2(2)
+
+quick + binary
+n log n + log n -> n log n
