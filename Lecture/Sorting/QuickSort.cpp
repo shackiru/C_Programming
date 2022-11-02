@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int swap(int *a, int *b)
+void swap(int *a, int *b)
 {
     int temp = *a;
     *a = *b;
@@ -20,8 +20,8 @@ int partition(int *arr, int low, int high)
             swap(&arr[index], &arr[i]);
             index++;        }
     }
-    swap(&arr[low], &arr[index--]);
-    return index--;
+    swap(&arr[low], &arr[index - 1]);
+    return index - 1;
 }
 
 void quickSort(int arr[], int low, int high)
@@ -45,6 +45,12 @@ int main()
     }
 
     quickSort(arr, 0, 999);
+
+    for(int i = 0; i < 1000; i++)
+    {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
 
     return 0;
 }
