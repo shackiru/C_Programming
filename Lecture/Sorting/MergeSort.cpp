@@ -21,7 +21,7 @@ void merge(int *arr, int left, int mid, int right)
     int indexRight = mid - left + 1;
     int indexArray = left;
 
-    while(indexLeft < mid - left && indexRight <= right - left)
+    while(indexLeft <= mid - left && indexRight <= right - left)
     {
         if (temp[indexLeft] < temp[indexRight])
         {
@@ -41,7 +41,7 @@ void merge(int *arr, int left, int mid, int right)
         arr[indexArray++] = temp[indexLeft++];
     }
 
-    while(indexRight <= right - mid)
+    while(indexRight <= right - left)
     {
         arr[indexArray++] = temp[indexRight++];
     }

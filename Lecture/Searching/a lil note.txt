@@ -5,3 +5,5 @@ quick -> n * log2(2)
 
 quick + binary
 n log n + log n -> n log n
+
+quick + 1000 * binary
