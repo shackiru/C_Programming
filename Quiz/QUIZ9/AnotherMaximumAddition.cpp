@@ -1,49 +1,62 @@
 #include <stdio.h>
 
-int main(){
+int quickSort(long long int *arr, int left, int right)
+{
 	
+}
+
+int binarySearch(long long int *arr, int left, int right, long long int find, int sample)
+{
+	while(left <= right)
+	{
+		int mid = (left + right) / 2;
+		if((long long)arr[mid] < find)
+		{
+			if((mid + 1 < sample) && ((long long)arr[mid + 1] > find))
+			{
+				return mid;
+			}
+			else if ((long long)mid + 1 > find)
+            {
+                return mid;
+            }
+            left = mid + 1;
+		}
+		else if((long long)arr[mid] == find)
+		{
+			return mid;
+		}
+		else
+		{
+			right = mid - 1;
+		}
+	}
+	return -1;
+}
+
+int main()
+{
 	int testCase;
 	scanf("%d", &testCase);
 	
-	long long int arr[10005] = {0};
+	long long int sample;
+	long long int temp [testCase + 1] = {};
 	
-	arr[0] = 0;
-	
-	for(int i = 1; i <= testCase; i++)
+	for(int tc = 1; tc <= testCase; tc++)
 	{
-		scanf("%lld", &arr[i]);
-		arr[i] += arr[i - 1];
+		scanf("%lld", &sample);
+		temp[tc] = temp[tc - 1] + sample;
 	}
 	
-	int sample;
+	int testSample;
 	long long int findSample;
-	scanf("%d", &sample);
 	
-	for(int i = 0; i < sample; i++)
+	scanf("%d", &testSample);
+	for(int i = 1; i <= testSample; i++)
 	{
 		scanf("%lld", &findSample);
-		
-		int index = -1;
-		
-		for(int j = testCase; j > 0; j--)
-		{
-			for(int k = 0; k <= j - 1; k++)
-			{
-				if(arr[j] - arr[k] <= findSample)
-				{
-					if(j - k > index)
-					{
-						index = j - k;
-						break;
-					} 
-					else if(j - k <= index){
-						break;
-					}
-				}
-			}
-		}
-		
-		printf("Case #%d: %d\n", i + 1, index);
+		int result = binarySearch(temp, 1, sample, findSample, testCase);	
+		printf("Case #%d: %d\n", i, result);
 	}
-	return 0;
 }
+
