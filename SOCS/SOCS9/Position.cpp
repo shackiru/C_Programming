@@ -2,7 +2,7 @@
 
 int binarySearch(int arr[], int n, int find)
 {
-    int index = -2;
+    int index = -1;
     int low = 0;
     int high = n - 1;
     int mid;
@@ -16,12 +16,12 @@ int binarySearch(int arr[], int n, int find)
         }
         else 
         {
-            if(arr[mid] == find)
+            if(find == arr[mid])
 			{
                 index = mid;
             }
-            high = mid - 1;
         }
+            high = mid - 1;
     }
     return index + 1;
 }
@@ -54,5 +54,3 @@ int main()
 
     return 0;
 }
-
-
