@@ -1,8 +1,24 @@
 #include <stdio.h>
 
-int quickSort(long long int *arr, int left, int right)
+void swap(int *a, int *b)
 {
-	
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
+int partition(long long int *arr, int left, int right)
+{
+	int pivot = arr[right];
+	int index = left - 1;
+}
+
+void quickSort(long long int *arr, int left, int right)
+{
+	if(left < right)
+	{
+
+	}
 }
 
 int binarySearch(long long int *arr, int left, int right, long long int find, int sample)
