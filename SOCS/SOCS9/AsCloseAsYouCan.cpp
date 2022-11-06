@@ -1,38 +1,55 @@
 #include <stdio.h>
 
-int binarySearch(int *arr, int tc, int find)
+int binarySearch(long long int arr[], int tc, long long int find)
 {
-    int left = 0;
+    int left = 1;
     int right = tc;
+    int mid;
 
     while(left <= right)
     {
-        int mid = (right + left) / 2;
-        if(find < arr[mid])
+        mid = (right + left) / 2;
+        if(arr[mid] == find)
         {
-            right = mid;
+            return mid;
+        }
+        else if(arr[mid] <= find)
+        {
+            if(mid + 1 > tc || arr[mid + 1] > find)
+            {
+                return mid;
+            }
+            left = mid + 1;
         }
         else
         {
-            left = mid + 1;
+            right = mid - 1;
         }
     }
-    if(arr[left] == find)
-    {
-        left++;
-    }
-    return left;
+    return -1;
 }
 
 int main()
 {
     int cases;
-    int arr[100005];
+    long long int arr[100005] = {0};
+    arr[0]= 0;
 
     scanf("%d", &cases);
-    for(int tc = 0; tc < cases; tc++)
+    for(int tc = 1; tc <= cases; tc++)
     {
-        scanf("%d", &arr[tc]);
+        scanf("%lld", &arr[tc]);
+        arr[tc] = arr[tc] + arr[tc - 1];
+        //printf("%d--%d ", tc, arr[tc]);
+    }
+
+    int findNum; 
+    long long num;
+    scanf("%d", &findNum);     
+    for(int tc = 1; tc <= findNum; tc++)
+    {
+        scanf("%lld", &num);
+        printf("Case #%d: %d\n", tc, binarySearch(arr, cases, num));
     }
 
     return 0;
