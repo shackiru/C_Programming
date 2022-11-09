@@ -21,7 +21,7 @@ void function(int *arr, int start, int end, int perm[], int n)
 
 int main()
 {
-    int arr[] = {1, 3, 5 ,7 ,9};
+    int arr[] = {10, 22, 9 ,33 ,21, 50, 41, 60, 80};
     int perm[105] = {};
     function(arr, 0, 4, perm, 0);
     
