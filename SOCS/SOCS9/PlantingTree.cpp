@@ -11,7 +11,7 @@ int main()
     char findName[105];
 
     FILE *f = fopen("testdata.in", "r");
-    	fscanf(f, "%d", &testCase); 
+    	fscanf(f, "%d", &testCase);     
 		fgetc(f);
         for(int tc = 0; tc < testCase; tc++)
         {
