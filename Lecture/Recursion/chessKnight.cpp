@@ -12,12 +12,12 @@ void move(int x, int y, int step, int board[10][10])
         return;
     }
 
-    if(board[x][y] <= step)
+    if(board[y][x] <= step)
     {
         return;
     }
 
-    board[x][y] = step;
+    board[y][x] = step;
     move(x - 1, y - 2, step + 1, board);
     move(x + 1, y - 2, step + 1, board);
     move(x - 2, y - 1, step + 1, board);
@@ -42,7 +42,7 @@ int main()
     }
     scanf("%d %d %d %d", &src.x, &src.y, &dst.x, &dst.y);
     move(src.x, src.y, 0, board);
-    printf("%d\n", board[dst.x][dst.y]);
+    printf("%d\n", board[dst.y][dst.x]);
 
     return 0;
 }
