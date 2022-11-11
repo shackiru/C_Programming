@@ -37,14 +37,23 @@ int cc3(int n)
     {
         return 0;
     }
-    if(n == 0)
+    else if(n == 0)
     {
         return 1;
     }
-    return cc3(n - 7) + cc3(n - 5) + cc3(n - 3);
+    else
+    {
+        return cc3(n - 7) + cc3(n - 5) + cc3(n - 3);
+    }
 }
 
 int main()
 {
+    printf("%d\n", cc1(4));
+    printf("%d\n", cc2(4));
+    printf("%d\n", cc1(100));
+    printf("%d\n", cc2(50));
+    printf("%d\n", cc3(50));
+
     return 0;
 }
