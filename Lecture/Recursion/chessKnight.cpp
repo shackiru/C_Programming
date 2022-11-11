@@ -41,6 +41,8 @@ int main()
         }
     }
     scanf("%d %d %d %d", &src.x, &src.y, &dst.x, &dst.y);
+    move(src.x, src.y, 0, board);
+    printf("%d\n", board[dst.x][dst.y]);
 
     return 0;
 }
