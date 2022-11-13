@@ -29,7 +29,7 @@ int main()
                     strcpy(temp, person[j]);
                     strcpy(person[j], person[k]);
                     strcpy(person[k], temp);
-                }
+                }	
             }
         }
         printf("Case #%d: %s\n", tc + 1, person[target]);  
