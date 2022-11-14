@@ -17,8 +17,7 @@ int main()
         scanf("%d %d", &personAmount, &target);
         for(int i = 0; i < personAmount; i++)
         {
-            scanf("%[^\n]", person[i]);
-            getchar();
+            scanf("%s", person[i]); 
         }
         for(int j = 0; j < personAmount - 1; j++)
         {
@@ -32,7 +31,7 @@ int main()
                 }	
             }
         }
-        printf("Case #%d: %s\n", tc + 1, person[target]);  
+        printf("Case #%d: %s\n", tc + 1, person[target-1]);  
     }
     return 0;
 }
