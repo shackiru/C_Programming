@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 struct Student
 {
@@ -18,10 +19,10 @@ int main()
         scanf("%s", s[tc].code);
         getchar();
         
-        scanf("[^\n]", s[tc].name);
+        scanf("%[^\n]", s[tc].name);
         getchar();
 
-        scanf("%d", s[tc].age);
+        scanf("%d", &s[tc].age);
         getchar();
     }
 
@@ -32,7 +33,7 @@ int main()
     {
         scanf("%d", &target);
 
-        printf("Query #%1:\n", i + 1);
+        printf("Query #%d:\n", i + 1);
         printf("ID: %s\n", s[target - 1].code);
         printf("Name: %s\n", s[target - 1].name);
         printf("Age: %d\n", s[target - 1].age);
