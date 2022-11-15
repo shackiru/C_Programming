@@ -11,6 +11,10 @@ int main()
     for(int tc = 0; tc < testCase; tc++)
     {
         scanf("%d %d", &num, &maxNum);
+        if()
+        {
+            
+        }
         printf("Case#%d: %d\n", tc + 1, count);
     }
 
