@@ -10,6 +10,6 @@ int main()
 	c = b - 1;
 	
 	printf("%d plus %d is %d\n", a, a, b);
-	printf("minus one is %d\n", c);
+	printf("%d minus 1 is %d\n", b, c);
 	
 }
