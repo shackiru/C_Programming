@@ -9,10 +9,10 @@ int bubbleSort(int arr[], int size)
         {
             if(arr[j] > arr[j + 1])
             {
-                count++;
                 int temp = arr[j];
                 arr[j] = arr[j + 1];
                 arr[j + 1] = temp;
+                count++;
             }
         }
     }
