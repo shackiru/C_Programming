@@ -163,7 +163,6 @@ int main()
             }
         }
     }
-        fclose(f);
-    
+    fclose(f);
     return 0;
 }
