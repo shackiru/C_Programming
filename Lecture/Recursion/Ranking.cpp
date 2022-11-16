@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 struct Student
 {
-    char name[15];
+    char name[50];
     int score;
     int rank;
 }ppti14[1005];
@@ -45,6 +46,73 @@ void quickSort(Student arr[], int low, int high)
     }
 }
 
+int partitionName(Student arr[], int low, int high)
+{
+    int x = rand() % (high - low + 1) + low;
+    swap(&arr[x], &arr[low]);
+
+    Student pivot = arr[low];
+    int index = low + 1;
+
+    for(int j = low + 1; j <= high; j++)
+    {
+        if(strcmp(pivot.name, arr[j].name) > 0)
+        {
+            swap(&arr[j], &arr[index]);
+            index++;
+        }
+    }
+    swap(&arr[low], &arr[index - 1]);
+    return index - 1;
+}
+
+void quickSortName(Student arr[], int low, int high)
+{
+    if(low < high)
+    {
+        int pi = partitionName(arr, low, high);
+        quickSortName(arr, low, pi - 1);
+        quickSortName(arr, pi + 1, high);
+    }
+}
+
+int linearSearch(Student arr[], int n, char name[])
+{
+    for(int j = 0; j < n; j++)
+    {
+        if(strcmp(name, arr[j].name) == 0)
+        {
+            return j;
+        }
+    }
+    return -1;
+}
+
+int binarySearch(Student arr[], int n, char name[])
+{
+	int low = 0;
+	int high = n - 1;
+	int mid;
+	
+	while(low <= high)
+	{
+		mid = (low + high) / 2;
+		if(strcmp(name, arr[mid].name) == 0)
+		{
+			return mid;
+		}
+        else if(strcmp(name, arr[mid].name) == 0)
+        {
+            high = mid - 1;
+        }
+        else
+        {
+            low = mid + 1;
+        }
+	}
+    return -1;
+}
+
 int main()
 {
     int n;
@@ -79,10 +147,20 @@ int main()
         int findName;
         char target[50];
 
-        fscanf(f, "%d", &findName);
+        fscanf(f, "%d\n", &findName);
         for(int i = 0; i < findName; i++)
         {
             fscanf(f, "%[^\n]\n", target);
+
+            int temp = linearSearch(ppti14, n, target);
+            if(temp >= 0)
+            {
+                printf("%d\n", ppti14[temp].rank);
+            }
+            else
+            {
+                printf("Not Found!\n");
+            }
         }
     }
         fclose(f);
