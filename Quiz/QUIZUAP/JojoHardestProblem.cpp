@@ -2,7 +2,7 @@
 
 int main()
 {
-    int cases;
+    long long int cases;
     scanf("%d", &cases);
 
     long long int num[cases];
@@ -34,6 +34,6 @@ int main()
             }
         }
     }
-    printf("%d\n", temp);
+    printf("%lld\n", temp);
     return 0;
 }

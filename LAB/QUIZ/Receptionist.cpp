@@ -196,7 +196,7 @@ void quickSort(int low, int high)
 	if(low < high)
 	{
 		int pivot = (partition(low, high));
-		quickSort(low, pivot - 1	);
+		quickSort(low, pivot - 1);
 		quickSort(pivot + 1, high);
 	}
 }
