@@ -16,6 +16,70 @@ struct Cinema
     int duration;
     int studio;  
 }data[105];
+void swap(Cinema *a, Cinema *b)
+{
+    Cinema temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int partition(int low, int high)
+{
+    char pivot[10];
+    strcpy(pivot, data[low].id);
+    int leftToRight = low;
+    int rightToLeft = high;
+
+    while(leftToRight < rightToLeft)
+    {
+        do
+        {
+            leftToRight++;
+        }
+        while(strcmp(data[leftToRight].id, pivot) <= 0);
+        do
+        {
+            rightToLeft--;
+        } 
+        while (strcmp(data[rightToLeft].id, pivot) > 0);
+        if(leftToRight < rightToLeft)
+        {
+            swap(&data[leftToRight], &data[rightToLeft]);
+
+        }
+    }
+    swap(&data[low], &data[rightToLeft]);
+    return rightToLeft;
+}
+
+int partition2 (int low, int high)
+{
+	char pivot[10];
+	strcpy(pivot, data[high].id);
+	
+	int i = low - 1;
+	
+	for(int j = low; j < high; j++)
+    {
+		if(strcmp(data[j].id, pivot) < 0)
+        {
+			i++;
+			swap(&data[j], &data[i]);
+		}
+	}
+	swap(&data[i + 1], &data[high]);
+	return i + 1;
+}
+
+void quickSort(int low, int high)
+{
+    if(low < high)
+    {
+        int pivot = (partition2(low, high));
+        quickSort(low, pivot - 1);
+        quickSort(pivot + 1, high);
+    }
+}
 
 void readFile()
 {
@@ -29,7 +93,7 @@ void readFile()
     {
         while(!feof(f))
         {
-            fscanf(f,"%[^,],%[^,],%d:%d,%d:%d,%d", 
+            fscanf(f,"%[^,],%[^,],%d:%d,%d:%d,%d\n", 
             data[size].id,
             data[size].movieName,
             &data[size].startHour,
@@ -38,7 +102,7 @@ void readFile()
             &data[size].endMinute,
             //&data[size].duration,
             &data[size].studio);
-            fgetc(f);
+        
             
             data[size].duration = (data[size].endHour - data[size].startHour) * 60 
     		+ (data[size].endMinute-data[size].startMinute);
@@ -59,6 +123,7 @@ void displayAll()
     }
     else
     {
+    	quickSort(0, size - 1);
         for(int i = 0; i < size; i++)
         {
             printf("No.%d\n", i + 1);
@@ -167,6 +232,7 @@ void updateData()
     else
     {
         int select;
+        quickSort(0, size);
         for(int i = 0; i < size; i++)
         {
             printf("No.%d\n", i + 1);
@@ -249,25 +315,19 @@ void updateData()
         while (studioNum < 1 || studioNum > 10);
 
         strcpy(data[select - 1].movieName, name);
-        data[size - 1].startHour = startHourAdd;
-        data[size - 1].startMinute = startMinAdd;
-        data[size - 1].endHour = endHourAdd;
-        data[size - 1].endMinute = endMinAdd;
-        data[size - 1].duration = addDuration;
-        data[size - 1].studio = studioNum;  
+        data[select - 1].startHour = startHourAdd;
+        data[select - 1].startMinute = startMinAdd;
+        data[select - 1].endHour = endHourAdd;
+        data[select - 1].endMinute = endMinAdd;
+        data[select - 1].duration = addDuration;
+        data[select - 1].studio = studioNum;  
     }
     return;
 }
 
+
+
 void mainMenu()
-
-void swap(Cinema *a, Cinema *b)
-{
-    Cinema temp = *a;
-    *a = *b;
-    *b = temp
-}
-
 {
     int input;
     while(true)
