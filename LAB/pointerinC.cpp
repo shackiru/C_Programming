@@ -4,7 +4,6 @@ int main()
 {
 	int number = 10;
 	int *numberPointer;
-	
 	numberPointer = &number;
 	number = 90;
 	

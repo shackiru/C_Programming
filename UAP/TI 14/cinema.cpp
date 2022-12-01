@@ -2,6 +2,15 @@
 #include <string.h>
 #include <stdlib.h>
 
+int abs(int a)
+{
+    if(a < 0)
+    {
+        return -a;
+    }
+    return a;
+}
+
 int size = 0;
 struct Cinema
 {
@@ -132,7 +141,7 @@ void updateData()
             printf("Movie Name: %s\n", data[i].movName);
             printf("Start Time: %02d:%02d\n", data[i].startHr, data[i].startMnt);
             printf("End Time: %02d:%02d\n", data[i].endHr, data[i].endMnt);
-            printf("Duration: %d Minutes\n", data[i].duration);
+            printf("Duration: %d Minutes\n", abs(data[i].duration));
         }
 
         int update;
@@ -225,7 +234,7 @@ void deleteData()
             printf("Movie Name: %s\n", data[i].movName);
             printf("Start Time : %02d:%02d\n", data[i].startHr, data[i].startMnt);
             printf("End Time: %02d:%02d\n", data[i].endHr, data[i].endMnt);
-            printf("Duration: %d Minutes\n", data[i].duration);
+            printf("Duration: %d Minutes\n", abs(data[i].duration));
         }
 
         int del;
@@ -267,19 +276,20 @@ void deleteData()
 
 void saveData()
 {
-    FILE *fp = fopen("cinema2", "w");
+    FILE *fp = fopen("cinema2.txt", "w");
+	for(int i = 0; i < size; i++)
+	{
+		fprintf(fp, "%s,%s,%d:%d,%d:%d,%d\n", 
+		data[i].movID, 
+		data[i].movName, 
+		data[i].startHr,
+        data[i].startMnt,
+        data[i].endHr,
+        data[i].endMnt,
+        data[i].studio);
+        fgetc(fp);
+	}
 
-    for(int j = 0; j < size; j++);
-    {
-        fprintf(fp, "%s,%s,%d:%d,%d:%d,%d",
-        data[size].movID,
-        data[size].movName,
-        data[size].startHr,
-        data[size].startMnt,
-        data[size].endHr,
-        data[size].endMnt,
-        data[size].studio);
-    }
     fclose(fp);
     exit(0);
 
@@ -386,7 +396,7 @@ void displayID()
             printf("Movie Name %s\n", data[v].movName);
             printf("Start Time : %02d:%02d\n", data[v].startHr, data[v].startMnt);
             printf("End Time: %02d:%02d\n", data[v].endHr, data[v].endMnt);
-            printf("Duration: %d Minutes\n", data[v].duration);
+            printf("Duration: %d Minutes\n", abs(data[v].duration));
         }
     return;
 }
@@ -400,7 +410,7 @@ void displayName()
             printf("Movie Name %s\n", data[i].movName);
             printf("Start Time : %02d:%02d\n", data[i].startHr, data[i].startMnt);
             printf("End Time: %02d:%02d\n", data[i].endHr, data[i].endMnt);
-            printf("Duration: %d Minutes\n", data[i].duration);
+            printf("Duration: %d Minutes\n", abs(data[i].duration));
         }
         return;
 }
@@ -436,7 +446,7 @@ void displayAll()
             printf("Movie Name %s\n", data[i].movName);
             printf("Start Time : %02d:%02d\n", data[i].startHr, data[i].startMnt);
             printf("End Time: %02d:%02d\n", data[i].endHr, data[i].endMnt);
-            printf("Duration: %d Minutes\n", data[i].duration);
+            printf("Duration: %d Minutes\n", abs(data[i].duration));
         }
 
         int select;

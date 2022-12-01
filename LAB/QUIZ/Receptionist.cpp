@@ -250,7 +250,10 @@ void saveData()
 	FILE *f = fopen("visitors.txt", "w");
 	for(int i = 0; i < size; i++)
 	{
-		fprintf(f, "%s#%s#%d\n", visitorArr[i].id, visitorArr[i].name, visitorArr[i].age);
+		fprintf(f, "%s#%s#%d\n", 
+		visitorArr[i].id, 
+		visitorArr[i].name, 
+		visitorArr[i].age);
 	}
 	fclose(f);
 	exit(0);
