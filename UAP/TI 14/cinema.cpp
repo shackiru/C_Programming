@@ -277,17 +277,16 @@ void deleteData()
 void saveData()
 {
     FILE *fp = fopen("cinema2.txt", "w");
-	for(int i = 0; i < size; i++)
+	for(int j = 0; j < size; j++)
 	{
-		fprintf(fp, "%s,%s,%d:%d,%d:%d,%d\n", 
-		data[i].movID, 
-		data[i].movName, 
-		data[i].startHr,
-        data[i].startMnt,
-        data[i].endHr,
-        data[i].endMnt,
-        data[i].studio);
-        fgetc(fp);
+        fprintf(fp, "%s,%s,%d:%d,%d:%d,%d",
+        data[j].movID,
+        data[j].movName,
+        data[j].startHr,
+        data[j].startMnt,
+        data[j].endHr,
+        data[j].endMnt,
+        data[j].studio);
 	}
 
     fclose(fp);
