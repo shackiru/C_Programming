@@ -75,8 +75,8 @@ void quickSort(int low, int high)
 {
     if(low < high)
     {
-        int pivot = (partition2(low, high));
-        quickSort(low, pivot - 1);
+        int pivot = (partition(low, high));
+        quickSort(low, pivot);
         quickSort(pivot + 1, high);
     }
 }
@@ -123,7 +123,7 @@ void displayAll()
     }
     else
     {
-    	quickSort(0, size - 1);
+    	quickSort(0, size);
         for(int i = 0; i < size; i++)
         {
             printf("No.%d\n", i + 1);
