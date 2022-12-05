@@ -11,6 +11,10 @@ int abs(int a)
     return a;
 }
 
+void table(){
+	printf("-----------------------------------------------------------------------------------------------\n");
+}
+
 int size = 0;
 struct Cinema
 {
@@ -67,22 +71,21 @@ void addData()
         }
     } while (strlen(name) < 1 || strlen(name) > 20);
     
-    int addStrHr;
-    int addStrMnt;
+    int addStrHr = 0;
+    int addStrMnt = 0;
     do
     {
         printf("Enter Start Time[HH:MM]: ");
         scanf("%d:%d", &addStrHr, &addStrMnt);
         getchar();
-        fflush(stdin);
         if(addStrHr < 0 || addStrHr > 23 || addStrMnt < 0 || addStrMnt > 59)
         {
             printf("Invalid time format!\n");
         }
     } while (addStrHr < 0 || addStrHr > 23 || addStrMnt < 0 || addStrMnt > 59);
 
-    int addEndHr;
-    int addEndMnt;
+    int addEndHr = 0;
+    int addEndMnt = 0;
     do
     {
         printf("Enter End Time[HH:MM]: ");
@@ -94,7 +97,8 @@ void addData()
         }
     } while (addEndHr < 0 || addEndHr > 23 || addEndMnt < 0 || addEndMnt > 59);
     
-    int addDur = (addEndHr - addStrHr) * 60 + (addEndHr - addStrHr);
+    int addDur = (addEndHr - addStrHr) * 60 + (addEndMnt - addStrMnt);
+
     int addStudio;
     do
     {
@@ -134,15 +138,21 @@ void updateData()
     }
     else
     {
+        printf("Number   |   ID   |         Name          | Start  |   End  |   Duration  | Studio\n");
+        table();
         for(int i = 0; i < size; i++)
         {
-            printf("No.%d\n", i + 1);
-            printf("Movie ID: %s\n", data[i].movID);
-            printf("Movie Name: %s\n", data[i].movName);
-            printf("Start Time: %02d:%02d\n", data[i].startHr, data[i].startMnt);
-            printf("End Time: %02d:%02d\n", data[i].endHr, data[i].endMnt);
-            printf("Duration: %d Minutes\n", abs(data[i].duration));
+            printf("Number %d |  %s |  %-20s |  %02d:%02d |  %02d:%02d |  %3d Minutes| Studio %d\n", i + 1, 
+            data[i].movID,
+            data[i].movName,
+            data[i].startHr, 
+            data[i].startMnt,
+            data[i].endHr, 
+            data[i].endMnt,
+            data[i].duration,
+            data[i].studio);
         }
+        table();
 
         int update;
         do
@@ -227,21 +237,27 @@ void deleteData()
     }
     else
     {
+        printf("Number   |   ID   |         Name          | Start  |   End  |   Duration   | Studio\n");
+        table();
         for(int i = 0; i < size; i++)
         {
-            printf("No.%d\n", i + 1);
-            printf("Movie ID: %s\n", data[i].movID);
-            printf("Movie Name: %s\n", data[i].movName);
-            printf("Start Time : %02d:%02d\n", data[i].startHr, data[i].startMnt);
-            printf("End Time: %02d:%02d\n", data[i].endHr, data[i].endMnt);
-            printf("Duration: %d Minutes\n", abs(data[i].duration));
+            printf("Number %d |  %s |  %-20s |  %02d:%02d |  %02d:%02d |  %3d Minutes | Studio %d\n", i + 1, 
+            data[i].movID,
+            data[i].movName,
+            data[i].startHr, 
+            data[i].startMnt,
+            data[i].endHr, 
+            data[i].endMnt,
+            data[i].duration,
+            data[i].studio);
         }
+        table();
 
         int del;
         do
         {
             printf("Choose index to delete [1 - %d]: ", size);
-            scanf("%d", &del);
+         	   scanf("%d", &del);
             fflush(stdin);
         } while (del < 1 || del > size);
 
@@ -276,7 +292,7 @@ void deleteData()
 
 void saveData()
 {
-    FILE *fp = fopen("cinema2.txt", "w");
+    FILE *fp = fopen("cinema.csv", "w");
 	for(int j = 0; j < size; j++)
 	{
         fprintf(fp, "%s,%s,%d:%d,%d:%d,%d",
@@ -388,43 +404,61 @@ void quickSortDur(int low, int high)
 
 void displayID()
 {
-    for(int v = 0; v < size; v++)
+    printf("Number   |   ID   |         Name          | Start  |  End  | Duration | Studio\n");
+    table();
+    for(int i = 0; i < size; i++)
         {
-            printf("No.%d\n", v + 1);
-            printf("Movie ID: %s\n", data[v].movID);
-            printf("Movie Name %s\n", data[v].movName);
-            printf("Start Time : %02d:%02d\n", data[v].startHr, data[v].startMnt);
-            printf("End Time: %02d:%02d\n", data[v].endHr, data[v].endMnt);
-            printf("Duration: %d Minutes\n", abs(data[v].duration));
+            printf("Number %d |  %s |  %-20s |  %02d:%02d |  %02d:%02d | Dur %3d | Studio %d\n", i + 1, 
+            data[i].movID,
+            data[i].movName,
+            data[i].startHr, 
+            data[i].startMnt,
+            data[i].endHr, 
+            data[i].endMnt,
+            data[i].duration,
+            data[i].studio);
         }
+        table();
     return;
 }
 
 void displayName()
 {
+    printf("Number   |   ID   |         Name          | Start  |  End  | Duration | Studio\n");
+    table();
     for(int i = 0; i < size; i++)
         {
-            printf("No.%d\n", i + 1);
-            printf("Movie ID: %s\n", data[i].movID);
-            printf("Movie Name %s\n", data[i].movName);
-            printf("Start Time : %02d:%02d\n", data[i].startHr, data[i].startMnt);
-            printf("End Time: %02d:%02d\n", data[i].endHr, data[i].endMnt);
-            printf("Duration: %d Minutes\n", abs(data[i].duration));
+            printf("Number %d |  %s |  %-20s |  %02d:%02d |  %02d:%02d | Dur %3d | Studio %d\n", i + 1, 
+            data[i].movID,
+            data[i].movName,
+            data[i].startHr, 
+            data[i].startMnt,
+            data[i].endHr, 
+            data[i].endMnt,
+            data[i].duration,
+            data[i].studio);
         }
+        table();
         return;
 }
 
 void displayDur()
 {
+    printf("Number   |   ID   |         Name          | Start  |   End  |   Duration  | Studio\n");;
+    table();
     for(int i = 0; i < size; i++)
         {
-            printf("No.%d\n", i + 1);
-            printf("Movie ID: %s\n", data[i].movID);
-            printf("Movie Name %s\n", data[i].movName);
-            printf("Start Time : %02d:%02d\n", data[i].startHr, data[i].startMnt);
-            printf("End Time: %02d:%02d\n", data[i].endHr, data[i].endMnt);
-            printf("Duration: %d Minutes\n", data[i].duration);
+            printf("Number %d |  %s |  %-20s |  %02d:%02d |  %02d:%02d |  %3d Minutes | Studio %d\n", i + 1, 
+            data[i].movID,
+            data[i].movName,
+            data[i].startHr, 
+            data[i].startMnt,
+            data[i].endHr, 
+            data[i].endMnt,
+            data[i].duration,
+            data[i].studio);
         }
+        table();
     return;
 }
 
@@ -438,15 +472,21 @@ void displayAll()
     }
     else
     {
+        printf("Number   |   ID   |         Name          | Start  |   End  |   Duration    |  Studio\n");
+        table();
         for(int i = 0; i < size; i++)
         {
-            printf("No.%d\n", i + 1);
-            printf("Movie ID: %s\n", data[i].movID);
-            printf("Movie Name %s\n", data[i].movName);
-            printf("Start Time : %02d:%02d\n", data[i].startHr, data[i].startMnt);
-            printf("End Time: %02d:%02d\n", data[i].endHr, data[i].endMnt);
-            printf("Duration: %d Minutes\n", abs(data[i].duration));
+            printf("Number %d |  %s |  %-20s |  %02d:%02d |  %02d:%02d |   %3d Minutes | Studio %d\n", i + 1, 
+            data[i].movID,
+            data[i].movName,
+            data[i].startHr, 
+            data[i].startMnt,
+            data[i].endHr, 
+            data[i].endMnt,
+            data[i].duration,
+            data[i].studio);
         }
+        table();
 
         int select;
 
@@ -457,6 +497,7 @@ void displayAll()
         printf("4. Back\n");
         printf("Select:");
         scanf("%d", &select);
+        getchar();
         fflush(stdin);
 
         switch(select)
@@ -490,7 +531,7 @@ void displayAll()
 
 void mainMenu()
 {
-    int input;
+    int input = 0;
 
     while(true)
     {
@@ -502,6 +543,7 @@ void mainMenu()
         printf("5. Save and Exit\n");
         printf("Input [1 - 5]: ");
         scanf("%d", &input);
+        getchar();
         fflush(stdin);
 
         switch(input)
