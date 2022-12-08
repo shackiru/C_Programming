@@ -31,9 +31,21 @@ void delBack(int *size)
     (*size)--;
 }
 
-void delElement()
+int delElement(int target, int num[], int *size)
 {
-
+    for(int i = 0; i < *size; i++)
+    {
+        if(num[i] == target)
+        {
+            for(int j = i; j < *size; j++)
+            {
+                num[j] = num[j + 1];
+            }
+            (*size)--;
+            return i;
+        }
+    }
+    return -1;
 }
 
 int main()
@@ -51,10 +63,11 @@ int main()
 
     print(num, i);
     printf("\n");
-    delFront(num, &i);
-    delBack(&i);
-    delBack(&i);
-    delBack(&i);
-        
+    
+    // delFront(num, &i);
+    // delBack(&i);
+
+    delElement();
+     
     print(num, i);
 }
