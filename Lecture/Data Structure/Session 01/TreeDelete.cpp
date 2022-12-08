@@ -15,7 +15,7 @@ int main()
             {
                 arr[j] = arr[j + 1];
             }
-            index --;
+            index--;
             break;
         }
     }
