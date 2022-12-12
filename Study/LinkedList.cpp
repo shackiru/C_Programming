@@ -2,11 +2,11 @@
 #include <stdlib.h>
 
 struct Student
-    {
-        char name [105];
-        int age;
-        float percentage;
-    };
+{
+    char name [105];
+    int age;
+    float percentage;
+};
 
 struct Student* emp = NULL;
 
