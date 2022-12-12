@@ -30,20 +30,20 @@ void create()
     temp = (struct Node*) malloc (sizeof(struct Node));
     temp->prev = NULL;
     temp->next = NULL;
-    printf("\n Enter the SSN of the Employee: ");
+    printf("Enter the SSN of the Employee: ");
     scanf("%d", &SSN);
     getchar();
 
-    printf("\n Enter the Name of the Employee: ");
+    printf("Enter the Name of the Employee: ");
     scanf("%[^\n]", name);
     getchar();
 
     printf("Enter the Department of the Employee: ");
-    scanf("%s", dept);
+    scanf("%[^\n]", dept);
     getchar();
 
     printf("Enter the Designation of the Employee: ");
-    scanf("%s", design);
+    scanf("%[^\n]", design);
     getchar();
 
     printf("Enter the Salary of the Employee: ");
@@ -57,6 +57,7 @@ void create()
     temp->SSN = SSN;
     strcpy(temp->name, name);
     strcpy(temp->dept, dept);
+    strcpy(temp->design, design);
     strcpy(temp->design, design);
     temp->salary = salary;
     temp->phone = phone;
@@ -111,15 +112,17 @@ void displayFirst()
         printf("\nLinked List elements from the beginning: \n");
         while(temp3 != NULL)
         {
-            printf("SSN\t: %d\n", temp3->SSN);
-            printf("Name\t: %s\n", temp3->name);
+            printf("SSN\t\t: %d\n", temp3->SSN);
+            printf("Name\t\t: %s\n", temp3->name);
             printf("Department\t: %s\n", temp3->dept);
             printf("Designation\t: %s\n", temp3->design);
-            printf("Salary\t: %f\n", temp3->salary);
+            printf("Salary\t\t: %f\n", temp3->salary);
             printf("Phone Number\t: %ld\n", temp3->phone);
+            printf("\n");
             temp3 = temp3->next;
         }
-        printf("Number of Employees\t: %d", size);
+        printf("Number of Employees\t: %d\n", size);
+        system("PAUSE");
     }
 }
 
@@ -161,11 +164,115 @@ int deleteFirst()
 
 int deleteLast()
 {
-    struct Node *temp;
+    struct Node* temp;
     temp = h;
     if(temp == NULL)
     {
         printf("\nList is empty!\n");
         return 0;
     }
+    if(temp->next == NULL)
+    {
+        printf("SSN\t: %d\n", temp->SSN);
+        printf("Name\t: %s\n", temp->name);
+        printf("Department\t: %s\n", temp->dept);
+        printf("Designation\t: %s\n", temp->design);
+        printf("Salary\t: %f\n", temp->salary);
+        printf("Phone Number\t: %ld\n", temp->phone);
+        free(temp);
+        h = NULL;
+    }
+    else
+    {
+        temp = temp2;
+        temp3 = temp2->prev;
+        temp3->next = NULL;
+        printf("SSN\t: %d\n", temp->SSN);
+        printf("Name\t: %s\n", temp->name);
+        printf("Department\t: %s\n", temp->dept);
+        printf("Designation\t: %s\n", temp->design);
+        printf("Salary\t: %f\n", temp->salary);
+        printf("Phone Number\t: %ld\n", temp->phone);
+        free(temp);
+        temp2 = temp3;
+    }
+    size--;
+    return 0;
+}
+
+void detail()
+{
+    int menu, amount;
+    h = NULL;
+    temp = temp2 = NULL;
+    while(true)
+    {
+        printf("----------Menu----------\n");
+        printf("1. Create a DLL of Employee\n");
+        printf("2. Display from the beginning\n");
+        printf("3. Insert at the beginning\n");
+        printf("4. Insert at the end\n");
+        printf("5. Delete at the beginning\n");
+        printf("6. Delete at the end\n");
+        printf("7. Exit\n");
+
+        printf("Choose the menu: ");
+        scanf("%d", &menu);
+        fflush(stdin);
+
+        switch(menu)
+        {
+            case 1:
+            {
+                printf("Enter number of employees: ");
+                scanf("%d", &amount);
+                fflush(stdin);
+                for(int i = 0; i < amount; i++)
+                {
+                    lastInsert();
+                }
+                break;
+            }
+            case 2:
+            {
+                displayFirst();
+                break;
+            }
+            case 3:
+            {
+                firstInsert();
+                break;
+            }
+            case 4:
+            {
+                lastInsert();
+                break;
+            }
+            case 5:
+            {
+                deleteFirst();
+                break;
+            }
+            case 6:
+            {
+                deleteLast();
+                break;
+            }
+            case 7:
+            {
+                exit(0);
+            }
+            default:
+            {
+                printf("Wrong Choice!\n");
+            }
+        }
+    }
+}
+
+int main()
+{
+    detail();
+
+    return 0;
 }
