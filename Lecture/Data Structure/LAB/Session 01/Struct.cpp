@@ -26,8 +26,19 @@ int main()
         strcpy(students[i]->name, names[i]);
     }
 
+    free(students[1]);
+    students[1] = NULL;
+
+
     for(int i = 0; i < 3; i++)
     {
-        printf("%s - %d\n", students[i]->name, students[i]->age);
+        if(students[i] != NULL)
+        {
+            printf("%d. %s - %d\n", i, students[i]->name, students[i]->age);
+        }
+        else
+        {
+            printf("%d. No Value\n", i);
+        }
     }
 }
