@@ -56,7 +56,7 @@ void displayData()
     if(head == NULL)
     {
         printf("Data not found!\n");
-        system("PAUSE\n");
+        system("PAUSE");
         return;
     }
     else
@@ -233,16 +233,25 @@ void lastDelete()
     else if(head -> next == NULL)
     {
         ptr = head;
+        head = NULL;
+        printf("Data to be Deleted: %d", ptr -> data);
+        free(ptr);
+        printf("\nData Delete Successful!\n");
+        system("PAUSE");
+
+    }
+    else
+    {
+        ptr = head;
         while(ptr -> next != NULL)
         {
             temp = ptr;
             ptr = ptr -> next;
         }
-
         temp -> next = NULL;
-        printf("Data to be deleted: %d", ptr -> data);
+        printf("Data to be Deleted: %d\n", ptr -> data);
         free(ptr);
-        printf("\nData deleted successful!\n");
+        printf("Data Deleted Successfully!\n");
         system("PAUSE");
     }
 }
@@ -393,6 +402,7 @@ int main()
 
     do
     {
+        system("CLS");
         printf("1. Add Data\n");
         printf("2. Display Data\n");
         printf("3. Delete Data\n");
@@ -400,7 +410,6 @@ int main()
         printf("5. Update Data\n");
         printf("6. Exit\n");
 
-        system("CLS");
         printf("Choose Menu: ");
         scanf("%d", &menu);
 
