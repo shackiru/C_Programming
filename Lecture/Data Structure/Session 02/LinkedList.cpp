@@ -55,5 +55,32 @@ int main()
         iter = iter -> next;
     }
 
+    //delete element
+    struct tNode *iterDel = head;
+    int x = 25;
+    //if elemet to be deleted is the head
+    if(head -> val == x)
+    {
+        head = head -> next;
+        free(iterDel);
+    }
+    else
+    {
+        while(iterDel -> next -> val)
+        {
+            iterDel = iterDel -> next;
+            struct tNode *del = iterDel -> next;
+            iterDel -> next = del -> next;
+        }
+    }
+
+    iter = head;
+
+    while(iter)
+    {
+        printf("%d\n", iter -> val);
+        iter = iter -> next;
+    }
+    
     return 0;
 }
