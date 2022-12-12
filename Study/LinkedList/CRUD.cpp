@@ -66,7 +66,7 @@ void displayData()
         printf("Index\t|\t Data\n");
         while(ptr != NULL)
         {
-            printf("%d \t!", i);
+            printf("%d \t", i);
             printf("\t%d\n", ptr -> data);
             ptr = ptr -> next;
             i++;
@@ -130,7 +130,6 @@ void inputByIndex()
     }
 
     displayData();
-
     printf("\nIndex start from 0\n");
     printf("Input index to input a new node: ", &position);
     printf("\nInput number: ", &temp -> data);
