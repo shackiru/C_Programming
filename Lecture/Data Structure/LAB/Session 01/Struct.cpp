@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <malloc.h>
 
 struct Student
 {
@@ -15,16 +17,17 @@ int main()
 
     int ages[] = {20, 15 , 17};
     char names[][100] {"Supandi", "Felix", "Nathasya"};
-    Student students[3];
+    Student *students[3];
 
     for(int i = 0; i < 3; i++)
     {
-        students[i].age = ages[i];
-        strcpy(students[i].name, names[i]);
+        students[i] = (Student*) malloc (sizeof(Student));
+        students[i]->age = ages[i];
+        strcpy(students[i]->name, names[i]);
     }
 
     for(int i = 0; i < 3; i++)
     {
-        printf("%s - %d\n", students[i].name, students[i].age);
+        printf("%s - %d\n", students[i]->name, students[i]->age);
     }
 }
