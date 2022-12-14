@@ -66,7 +66,6 @@ void create()
     strcpy(temp->phone, phone);
 
     size++;
-    system("PAUSE");
 }
 
 void firstInsert()
@@ -238,6 +237,7 @@ void detail()
                 for(int i = 0; i < amount; i++)
                 {
                     lastInsert();
+                    system("PAUSE");
                 }
                 break;
             }
@@ -249,11 +249,13 @@ void detail()
             case 3:
             {
                 firstInsert();
+                system("PAUSE");
                 break;
             }
             case 4:
             {
                 lastInsert();
+                system("PAUSE");
                 break;
             }
             case 5:
@@ -269,6 +271,7 @@ void detail()
             case 7:
             {
                 exit(0);
+                system("PAUSE");
             }
             default:
             {
