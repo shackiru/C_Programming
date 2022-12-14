@@ -11,7 +11,7 @@ struct Node
     struct Node *next;
 
     int SSN;
-    long int phone;
+    char phone[105];
     float salary;
     char name[105];
     char dept[105];
@@ -21,7 +21,7 @@ struct Node
 void create()
 {
     int SSN;
-    long int phone;
+    char phone[105];
     float salary;
     char name[105];
     char dept[105];
@@ -30,29 +30,32 @@ void create()
     temp = (struct Node*) malloc (sizeof(struct Node));
     temp->prev = NULL;
     temp->next = NULL;
-    printf("Enter the SSN of the Employee: ");
+
+    printf("==========Input the Employee Data==========\n");
+    printf("Enter the SSN of the Employee\t\t: ");
     scanf("%d", &SSN);
     getchar();
 
-    printf("Enter the Name of the Employee: ");
+    printf("Enter the Name of the Employee\t\t: ");
     scanf("%[^\n]", name);
     getchar();
 
-    printf("Enter the Department of the Employee: ");
+    printf("Enter the Department of the Employee\t: ");
     scanf("%[^\n]", dept);
     getchar();
 
-    printf("Enter the Designation of the Employee: ");
+    printf("Enter the Designation of the Employee\t: ");
     scanf("%[^\n]", design);
     getchar();
 
-    printf("Enter the Salary of the Employee: ");
+    printf("Enter the Salary of the Employee\t: ");
     scanf("%f", &salary);
     getchar();
 
-    printf("Enter the Phone Number of the Employee: ");
-    scanf("%ld", &phone);
+    printf("Enter the Phone Number of the Employee\t: ");
+    scanf("%s", phone);
     getchar();
+    printf("\n");
 
     temp->SSN = SSN;
     strcpy(temp->name, name);
@@ -60,9 +63,10 @@ void create()
     strcpy(temp->design, design);
     strcpy(temp->design, design);
     temp->salary = salary;
-    temp->phone = phone;
+    strcpy(temp->phone, phone);
 
     size++;
+    system("PAUSE");
 }
 
 void firstInsert()
@@ -116,8 +120,8 @@ void displayFirst()
             printf("Name\t\t: %s\n", temp3->name);
             printf("Department\t: %s\n", temp3->dept);
             printf("Designation\t: %s\n", temp3->design);
-            printf("Salary\t\t: %f\n", temp3->salary);
-            printf("Phone Number\t: %ld\n", temp3->phone);
+            printf("Salary\t\t: %0.2f\n", temp3->salary);
+            printf("Phone Number\t: %s\n", temp3->phone);
             printf("\n");
             temp3 = temp3->next;
         }
@@ -128,7 +132,7 @@ void displayFirst()
 
 int deleteFirst()
 {
-    struct Node *temp;
+    struct Node* temp;
     temp = h;
     if(temp == NULL)
     {
@@ -137,12 +141,12 @@ int deleteFirst()
     }
     if(temp->next == NULL)
     {
-        printf("SSN\t: %d\n", temp3->SSN);
-        printf("Name\t: %s\n", temp3->name);
-        printf("Department\t: %s\n", temp3->dept);
-        printf("Designation\t: %s\n", temp3->design);
-        printf("Salary\t: %f\n", temp3->salary);
-        printf("Phone Number\t: %ld\n", temp3->phone);
+        printf("SSN\t\t: %d\n", temp->SSN);
+        printf("Name\t\t: %s\n", temp->name);
+        printf("Department\t: %s\n", temp->dept);
+        printf("Designation\t: %s\n", temp->design);
+        printf("Salary\t\t: %0.2f\n", temp->salary);
+        printf("Phone Number\t: %s\n", temp->phone);
         free(temp);
         h = NULL;
     }
@@ -150,15 +154,16 @@ int deleteFirst()
     {
         h = h->next;
         h->prev = NULL;
-        printf("SSN\t: %d\n", temp3->SSN);
-        printf("Name\t: %s\n", temp3->name);
-        printf("Department\t: %s\n", temp3->dept);
-        printf("Designation\t: %s\n", temp3->design);
-        printf("Salary\t: %f\n", temp3->salary);
-        printf("Phone Number\t: %ld\n", temp3->phone);
+        printf("SSN\t\t: %d\n", temp->SSN);
+        printf("Name\t\t: %s\n", temp->name);
+        printf("Department\t: %s\n", temp->dept);
+        printf("Designation\t: %s\n", temp->design);
+        printf("Salary\t\t: %02.f\n", temp->salary);
+        printf("Phone Number\t: %s\n", temp->phone);
         free(temp);
     }
     size--;
+    system("PAUSE");
     return 0;
 }
 
@@ -173,12 +178,12 @@ int deleteLast()
     }
     if(temp->next == NULL)
     {
-        printf("SSN\t: %d\n", temp->SSN);
-        printf("Name\t: %s\n", temp->name);
+        printf("SSN\t\t: %d\n", temp->SSN);
+        printf("Name\t\t: %s\n", temp->name);
         printf("Department\t: %s\n", temp->dept);
         printf("Designation\t: %s\n", temp->design);
-        printf("Salary\t: %f\n", temp->salary);
-        printf("Phone Number\t: %ld\n", temp->phone);
+        printf("Salary\t\t: %0.2f\n", temp->salary);
+        printf("Phone Number\t: %s\n", temp->phone);
         free(temp);
         h = NULL;
     }
@@ -187,16 +192,17 @@ int deleteLast()
         temp = temp2;
         temp3 = temp2->prev;
         temp3->next = NULL;
-        printf("SSN\t: %d\n", temp->SSN);
-        printf("Name\t: %s\n", temp->name);
+        printf("SSN\t\t: %d\n", temp->SSN);
+        printf("Name\t\t: %s\n", temp->name);
         printf("Department\t: %s\n", temp->dept);
         printf("Designation\t: %s\n", temp->design);
-        printf("Salary\t: %f\n", temp->salary);
-        printf("Phone Number\t: %ld\n", temp->phone);
+        printf("Salary\t\t: %0.2f\n", temp->salary);
+        printf("Phone Number\t: %s\n", temp->phone);
         free(temp);
         temp2 = temp3;
     }
     size--;
+    system("PAUSE");
     return 0;
 }
 
@@ -207,6 +213,7 @@ void detail()
     temp = temp2 = NULL;
     while(true)
     {
+        system("CLS");
         printf("----------Menu----------\n");
         printf("1. Create a DLL of Employee\n");
         printf("2. Display from the beginning\n");
@@ -224,9 +231,10 @@ void detail()
         {
             case 1:
             {
-                printf("Enter number of employees: ");
+                printf("Enter number of employees\t: ");
                 scanf("%d", &amount);
                 fflush(stdin);
+                printf("\n");
                 for(int i = 0; i < amount; i++)
                 {
                     lastInsert();
