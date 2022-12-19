@@ -58,7 +58,7 @@ int main()
     //delete element
     struct tNode *iterDel = head;
     int x = 25;
-    //if elemet to be deleted is the head
+    //if element to be deleted is the head
     if(head -> val == x)
     {
         head = head -> next;
