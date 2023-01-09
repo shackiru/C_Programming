@@ -89,7 +89,75 @@ void popHead()
     }
     else if(head == tail)
     {
-        
+        free(head);
+        head = tail = NULL;
+    }
+    else
+    {
+        struct Food * temp = head;
+        head = head->next;
+        free(temp);
+    }
+}
+
+void popTail()
+{
+    if(head == NULL)
+    {
+        return;
+    }
+    else if(head == tail)
+    {
+        free(head);
+        head = tail = NULL;
+    }
+    else
+    {
+        struct Food *curr = head;
+
+        while(curr->next != tail)
+        {
+            curr = curr->next;
+        }
+
+        free(tail);
+        curr->next = NULL;
+        tail = curr;
+    }
+}
+
+void popMid(int price)
+{
+    if(head == NULL)
+    {
+        return;
+    }
+    else if(head->price == price)
+    {
+        popHead();
+    }
+    else if(tail->price == price)
+    {
+        popTail();
+    }
+    else
+    {
+        struct Food *curr = head;
+        while(curr->next != NULL && curr->next->price != price)
+        {
+            curr = curr->next;
+        }
+
+        if(curr->next == NULL || curr->next->price != price)
+        {
+            printf("Data to be deleted is not found!\n");
+        }
+        else
+        {
+            struct Food*temp = curr->next->next;
+            free(curr->next);
+            curr->next = temp;
+        }
     }
 }
 
@@ -101,7 +169,39 @@ int main()
     pushTail(25000);
     pushMid(19000);
     pushMid(49000);
+
+    printf("Starting Price: ");
     printFood();
+    printf("\n\n");
+
+    printf("Before Delete Head: ");
+    printFood();
+    printf("\n");
+    
+    popHead();
+    printf("Delete Head: ");
+    printFood();
+    printf("\n\n");
+
+    printf("Before Delete Tail: ");
+    printFood();
+    printf("\n");
+
+    popTail();
+    printf("Delete Tail: ");
+    printFood();
+    printf("\n\n");
+
+    printf("Before Delete Mid: ");
+    printFood();
+    printf("\n");
+
+    popMid(23000);
+    printf("Delete Mid: ");
+    printFood();
+    printf("\n");
+    
+    
 
     return 0;
 }
