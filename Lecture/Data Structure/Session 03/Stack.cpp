@@ -1,27 +1,34 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define MAX 10000
+#define MAX 1
 
 int stack[MAX];
 int topIdx;
 
 void push(int val)
 {
-    //insert to ARRAY
-    stack[topIdx++] = val;
-
+    if(topIdx == MAX - 1)
+    {
+        return;
+    }
+    
     //increase topIDX
+    topIdx++;
+
+    //insert to ARRAY
+    stack[topIdx] = val;
+
 }
 
 int pop()
 {
-    int val = stack[topIdx];
-    stack[topIdx] = 0;
-    topIdx--;
     if(topIdx == -1)
     {
         return -1;
     }
+    int val = stack[topIdx];
+    stack[topIdx] = 0;
+    topIdx--;
     return val;
 }
 
@@ -32,7 +39,7 @@ int top()
 
 void printStack()
 {
-    for(int i = 0; i < topIdx; i++)
+    for(int i = 0; i <= topIdx; i++)
     {
         printf("%d ", stack[i]);
     }
@@ -41,11 +48,15 @@ void printStack()
 
 int main()
 {
-    topIdx = 0;
+    topIdx = -1;
+    int val;
     push(10);
     push(5);
     printStack();
-    pop();
+    val = pop();
+    printf("pop = %d\n", val);
+    val = pop();
+    printf("pop = %d\n", val);
     printStack();
 
     return 0;
