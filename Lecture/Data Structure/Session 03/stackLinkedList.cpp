@@ -26,17 +26,23 @@ void push(int val)
     else
     {
         struct node * temp = createNode(val);
-
+        temp->next = stack;
+        stack = temp;
     }
 }
 
 struct node * pop()
 {
+    if(!stack)
+    {
+        struct node * temp = NULL;
+        return temp;
+    }
     //get top of stack
     struct node * delNode = stack;
 
     // copy value of stack
-    struct node * temp = delNode;
+    struct node * temp = createNode(delNode->val);
 
     // delete top stack
     stack = delNode->next;
@@ -63,15 +69,35 @@ void printStack()
     printf("\n");
 }
 
+int isFull()
+{
+
+}
+
 int main()
 {
     push(10);
     push(5);
     printStack();
+    
     struct node * topDat = top();
     printf("top data: %d\n", topDat->val);
+
     struct node * popped = pop();
+    printf("pop data: %d\n", popped->val);
+
+    popped = pop();
     printStack();
+    if(popped)
+    {
+        printf("popped data: %d\n", popped->val);
+    }
+
+    popped = pop();
+    if(popped)
+    {
+        printf("popped data: %d\n", popped->val);
+    }
 
     return 0;
 }
