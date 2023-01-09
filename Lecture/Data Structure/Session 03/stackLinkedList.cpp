@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#define MAX 5
 
 struct node
 {
@@ -8,6 +9,7 @@ struct node
 };
 
 struct node * stack = NULL;
+int countEl;
 
 struct node * createNode(int val)
 {
@@ -19,6 +21,7 @@ struct node * createNode(int val)
 
 void push(int val)
 {
+    countEl++;
     if(stack == NULL)
     {
         stack = createNode(val);
@@ -69,14 +72,33 @@ void printStack()
     printf("\n");
 }
 
-int isFull()
+bool isFull()
 {
+    struct node * iter = stack;
+    int value = 0;
+    while(iter != NULL)
+    {
+        iter = iter->next;
+        value++;
+    }
 
+    printf("%d\n", value);
+    if (countEl == MAX)
+    {
+        return true;
+    }
+
+    return false;
 }
 
 int main()
 {
     push(10);
+    push(5);
+    push(5);
+    push(5);
+    push(5);
+    push(5);
     push(5);
     printStack();
     
@@ -98,6 +120,11 @@ int main()
     {
         printf("popped data: %d\n", popped->val);
     }
+    printStack();
+    push(17);
+    push(17);
+    printf("%d\n", isFull());
+    printStack();
 
     return 0;
 }
