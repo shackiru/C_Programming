@@ -91,11 +91,11 @@ void popHead(Node **head, Node **tail)
     }
     else
     {
-        Node *temp = *head;
-        *head = (*head)->next;
-        free(temp);
-        temp = NULL;
-        (*head)->prev = NULL;
+        // Node *temp = *head;
+        // *head = (*head)->next;
+        // free(temp);
+        // temp = NULL;
+        // (*head)->prev = NULL;
 
         *head = (*head)->next;
         free((*head)->prev);
@@ -116,7 +116,43 @@ void popTail(Node **head, Node **tail)
     }
     else
     {
+        *tail = (*tail)->prev;
+        free((*tail)->next);
+        (*tail)->next = NULL;
 
+    }
+}
+
+void popValue(Node **head, Node **tail, const char *name)
+{
+    if(*head == NULL)
+    {
+        return;
+    }
+    else if(strcmp(name, (*head)->name) == 0)
+    {
+        popHead(head, tail);
+    }
+    else if(strcmp(name, (*tail)->name) == 0)
+    {
+        popTail(head, tail);
+    }
+    else
+    {
+        Node *curr = *head;
+        while(curr->next != NULL && strcmp(curr->name, name) != 0)
+        {
+            curr = curr->next;
+        }
+        if(curr->next == NULL)
+        {
+            printf("%s not found!\n", name);
+            return;
+        }
+        curr->next->prev = curr->prev;
+        curr->prev->next = curr->next;
+        free(curr);
+        curr = NULL;
     }
 }
 
@@ -138,7 +174,19 @@ int main()
     printf("After:\n");
     popHead(&head, &tail);
     view(head);
-    printf("\n");
+    printf("\n");    
     
+    printf("After:\n");
+    popTail(&head, &tail);
+    view(head);
+    printf("\n");
+
+    printf("After:\n");
+    popValue(&head, &tail, "Budi");
+    popValue(&head, &tail, "Rahmat");
+    popValue(&head, &tail, "Fredoy");
+    view(head);
+    printf("\n");
+
     return 0;
 }
