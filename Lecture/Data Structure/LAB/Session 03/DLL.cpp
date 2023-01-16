@@ -156,6 +156,42 @@ void popValue(Node **head, Node **tail, const char *name)
     }
 }
 
+Node *searchNode(Node *head, const char *name)
+{
+	Node *curr = head;
+	while(curr)
+	{
+		if(strcmp(curr->name, name) == 0)
+        {
+            printf("Name: %s\n", name);
+            return curr;
+        }
+        curr = curr->next;
+	}
+    return NULL;
+}
+
+void updateNode(Node **head, Node **tail, char *name, int age)
+{
+    Node *target = searchNode(*head, name);
+    if(target == NULL)
+    {
+        printf("%s not found!\n", name);
+    }
+    else
+    {
+        target->age = age;
+    }
+}
+
+void popAll(Node **head, Node **tail)
+{
+    while(*head)
+    {
+        popHead(head, tail);
+    }
+}
+
 int main()
 {
     Node *head = NULL, *tail = NULL;
