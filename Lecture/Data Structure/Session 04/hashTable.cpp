@@ -63,7 +63,7 @@ void deleteData(char name[]) {
         hashMap[key] = NULL;
         printf("Menu Deleted!\n");
         printf("Press Enter to Continue...");
-        getchar(); getchar();
+        getchar(); 
         return;
     }
     // case 2 dimana pada hash ada lebih dari element
@@ -74,14 +74,14 @@ void deleteData(char name[]) {
             free(temp);
             printf("Menu Deleted!\n");
             printf("Press Enter to Continue...");
-            getchar(); getchar();
+            getchar(); 
             return;
         }
         iter = iter->next;
     }
     printf("Menu Not Found\n");
     printf("Press Enter to Continue...");
-    getchar(); getchar();
+    getchar(); 
 }
 
 void displayData() {
@@ -126,7 +126,7 @@ int main() {
                 char name[50];
                 int age;
                 printf("Menu Name: ");
-                scanf("%s", name);
+                scanf("%[^\n]", name); getchar();
                 printf("Price: ");
                 scanf("%d", &age);
                 insertData(name, age);
@@ -135,7 +135,7 @@ int main() {
             case 2: {
                 char name[50];
                 printf("Menu to Remove: ");
-                scanf("%s", name);
+                scanf("%[^\n]", name); getchar();
                 deleteData(name);
                 break;
             }
