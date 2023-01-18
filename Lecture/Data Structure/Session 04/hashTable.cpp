@@ -10,7 +10,6 @@ struct Hash{
 };
 
 struct Hash *hashMap[SIZE] = {};
-struct Hash *tempo = (struct Hash*) malloc(sizeof(Hash));
 
 int hashCode(char name[]) {
     // function pembuatan key
@@ -22,12 +21,17 @@ int hashCode(char name[]) {
     return key;
 }
 
-void insertData(char name[], int age) {
+struct Hash* createHash(const char name[], int age){
     struct Hash *newNode = (struct Hash*) malloc(sizeof(Hash));
-    int key = hashCode(name);
     strcpy(newNode->name, name);
     newNode->age = age;
     newNode->next = NULL;
+    return newNode;
+}
+
+void insertData(char name[], int age) {
+    struct Hash *newNode = createHash(name, age);
+    int key = hashCode(name);
     struct Hash *prev = NULL;
     struct Hash *iter = hashMap[key];
 
