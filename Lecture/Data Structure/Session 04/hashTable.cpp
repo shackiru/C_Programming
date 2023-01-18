@@ -90,6 +90,7 @@ void displayData() {
         }
     }
     printf("+========================================+\n");
+    printf("Press Any Key to Continue...");
 }
 
 void menu() {
@@ -110,7 +111,7 @@ int main() {
             scanf("%c", &input);
             getchar();
         } while(!isdigit(input) || ((input - '0') < 0 || (input - '0') > 4));
-        switch(input) {
+        switch(input - '0') {
             case 1: {
                 char name[50];
                 int age;
