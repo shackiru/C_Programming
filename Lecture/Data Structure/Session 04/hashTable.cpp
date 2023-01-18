@@ -49,6 +49,8 @@ void insertData(char name[], int age) {
         prev->next = newNode;
     }
     printf("Menu Added!\n");
+    printf("Press Enter to Continue...");
+    getchar(); getchar();
 }
 
 void deleteData(char name[]) {
@@ -60,6 +62,8 @@ void deleteData(char name[]) {
         free(iter);
         hashMap[key] = NULL;
         printf("Menu Deleted!\n");
+        printf("Press Enter to Continue...");
+        getchar(); getchar();
         return;
     }
     // case 2 dimana pada hash ada lebih dari element
@@ -69,28 +73,34 @@ void deleteData(char name[]) {
             iter->next = iter->next->next;
             free(temp);
             printf("Menu Deleted!\n");
+            printf("Press Enter to Continue...");
+            getchar(); getchar();
+            return;
         }
         iter = iter->next;
     }
     printf("Menu Not Found\n");
+    printf("Press Enter to Continue...");
+    getchar(); getchar();
 }
 
 void displayData() {
     printf("%15s\n", "Restauran Menu");
     printf("+========================================+\n");
-    printf("| %-23s | %-13s |\n", "Name", "Price");
+    printf("| %-23s | %-12s |\n", "Name", "Price");
     printf("+========================================+\n");
     for(int i = 0; i < SIZE; i++) {
         if(hashMap[i] != NULL) {
             struct Hash *iter = hashMap[i];
             while(iter) {
-                printf("| %-20s | %-10d |\n", iter->name, iter->age);
+                printf("| %-23s | %-12d |\n", iter->name, iter->age);
                 iter = iter->next;
             }
         }
     }
     printf("+========================================+\n");
-    printf("Press Any Key to Continue...");
+    printf("Press Enter to Continue...");
+    getchar();
 }
 
 void menu() {
