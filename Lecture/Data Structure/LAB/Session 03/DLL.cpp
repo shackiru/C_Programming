@@ -168,7 +168,7 @@ Node *searchNode(Node *head, const char *name)
         }
         curr = curr->next;
 	}
-    return NULL;
+    return 0;
 }
 
 void updateNode(Node **head, Node **tail, char *name, int age)
@@ -221,6 +221,11 @@ int main()
     popValue(&head, &tail, "Budi");
     popValue(&head, &tail, "Rahmat");
     popValue(&head, &tail, "Fredoy");
+    view(head);
+    printf("\n");
+
+    printf("After:\n");
+    updateNode(&head, &tail, "Blue", 18);
     view(head);
     printf("\n");
 
