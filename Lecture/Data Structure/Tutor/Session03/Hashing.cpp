@@ -22,7 +22,7 @@ void printTable()
     {
         if(hashTable[i][0] != '\0')
         {
-
+            printf("%s\n", hashTable[i]);
         }
     }
 }
