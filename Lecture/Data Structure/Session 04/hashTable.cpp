@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
+
 #define SIZE 150
 
 struct Hash{
@@ -46,6 +48,9 @@ void insertData(char name[], int age) {
     // Jika list sudah terisi maka akan pushtail
         prev->next = newNode;
     }
+    printf("Menu Added!\n");
+    printf("Press Enter to Continue...");
+    getchar(); getchar();
 }
 
 void deleteData(char name[]) {
@@ -54,10 +59,11 @@ void deleteData(char name[]) {
     // cek apakah yang akan dihapus sudah berisi
     // case 1 dimana pada hash tersebut hanya ada 1 element
     if(iter && strcmp(name, iter->name) == 0) {
-        printf("%s %d\n", iter->name, iter->age);
         free(iter);
         hashMap[key] = NULL;
-        printf("Data Deleted\n");
+        printf("Menu Deleted!\n");
+        printf("Press Enter to Continue...");
+        getchar(); 
         return;
     }
     // case 2 dimana pada hash ada lebih dari element
@@ -66,50 +72,70 @@ void deleteData(char name[]) {
             struct Hash *temp = iter->next;
             iter->next = iter->next->next;
             free(temp);
-            printf("Data Deleted\n");
+            printf("Menu Deleted!\n");
+            printf("Press Enter to Continue...");
+            getchar(); 
+            return;
         }
         iter = iter->next;
     }
-    printf("Data Not Found\n");
+    printf("Menu Not Found\n");
+    printf("Press Enter to Continue...");
+    getchar(); 
 }
 
 void displayData() {
+    printf("%15s\n", "Restauran Menu");
+    printf("+========================================+\n");
+    printf("| %-23s | %-12s |\n", "Name", "Price");
+    printf("+========================================+\n");
     for(int i = 0; i < SIZE; i++) {
         if(hashMap[i] != NULL) {
             struct Hash *iter = hashMap[i];
             while(iter) {
-                printf("%s - %d\n", iter->name, iter->age);
+                printf("| %-23s | %-12d |\n", iter->name, iter->age);
                 iter = iter->next;
             }
         }
     }
+    printf("+========================================+\n");
+    printf("Press Enter to Continue...");
+    getchar();
 }
 
 void menu() {
-    printf("Menu\n");
-    printf("1. Insert Data\n");
-    printf("2. Delete Data\n");
-    printf("3. Display All Data\n");
+    system("cls");
+    printf("Restaurant Data\n");
+    printf("1. Add Menu\n");
+    printf("2. Remove Menu\n");
+    printf("3. Display Menu\n");
     printf("4. Cancel\n");
+    printf("What do you want to do? ");
 }
 
 int main() {
-    int input = 0;
+    char input = 0;
     do {
-        menu();
-        scanf("%d", &input);
-        switch(input) {
+        do {
+            menu();
+            scanf("%c", &input);
+            getchar();
+        } while(!isdigit(input) || ((input - '0') < 0 || (input - '0') > 4));
+        switch(input - '0') {
             case 1: {
                 char name[50];
                 int age;
-                scanf("%s", name);
+                printf("Menu Name: ");
+                scanf("%[^\n]", name); getchar();
+                printf("Price: ");
                 scanf("%d", &age);
                 insertData(name, age);
                 break;
             }
             case 2: {
                 char name[50];
-                scanf("%s", name);
+                printf("Menu to Remove: ");
+                scanf("%[^\n]", name); getchar();
                 deleteData(name);
                 break;
             }
