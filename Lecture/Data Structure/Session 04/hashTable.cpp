@@ -148,6 +148,6 @@ int main() {
                 printf("Error Input\n");
                 break;
         }
-    } while(input != 4);
+    } while(input - '0' != 4);
     printf("THANK YOU\n");
 }
