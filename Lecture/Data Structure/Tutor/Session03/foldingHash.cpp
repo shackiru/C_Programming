@@ -5,37 +5,39 @@
 
 int main()
 {
-    int value = 25;
+    int value = 5628;
     int key;
     long long int hashed;
     char buffer[50] = {};
 
-    sprintf(buffer, "%lld", 99 * 99);
-    printf("%s\n", buffer);
-
+    sprintf(buffer, "%d", value);
     char keyC[25] = {};
-    if(strlen(buffer) % 2 == 1)
+    int loop = 0;
+
+    if(strlen(buffer) % 2 == 0)
     {
-        int mid = strlen(buffer) / 2;
-        strncat(keyC, &buffer[mid], 1);
+        loop = strlen(buffer) / 2;
     }
     else
     {
-        int mid = strlen(buffer) / 2 - 1;
-        strncat(keyC, &buffer[mid], 1);
-        strncat(keyC, &buffer[mid + 1], 1);
+        loop = strlen(buffer) / 2 + 1;
     }
-    char *strBuff;
-    printf("%s\n", keyC);
+    printf("Loop: %d\n", loop);
+    int sum = 0;
+    int iter = 0;
+    int temp = 0;
 
-    // strtol solutin
-    //hashed = strtol(keyC, &strBuff, 10);
-
-    sscanf(keyC, "%lld", &hashed);
-    printf("%lld\n", hashed + 1);
-
-    //division
-    hashed = hashed % SIZE;
+    while(iter < strlen(buffer))
+    {
+        if(iter % 2 == 0 && iter + 1 < strlen(buffer))
+        {
+            temp = temp + (buffer[iter] - '0') * 10;
+        }
+        else
+        {
+            temp = temp + (buffer[iter] - '0');
+        }
+    }
 
     return 0;
 }
