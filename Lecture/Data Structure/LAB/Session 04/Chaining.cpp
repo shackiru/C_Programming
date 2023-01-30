@@ -22,6 +22,7 @@ Node *createNode(const char *name, const int age)
     Node *newNode = (Node *)malloc(sizeof(Node));
     strcpy(newNode->name, name);
     newNode->age = age;
+    newNode->next = newNode->prev = NULL;
     return newNode;
 }
 
@@ -48,7 +49,9 @@ int hashing(const char *name)
 
 void insert(const char *name, const int age)
 {
+    
     int key = hashing(name);
+    Node *newNode = createNode(name, age);
     if(table[key] == NULL)
     {
         table[key] = createRow();
@@ -57,17 +60,15 @@ void insert(const char *name, const int age)
     }
     Row *r = table[key];
 
-    if(strcmp(r->head->name, name) > 0)
+    if(strcmp(r->head->name, name) < 0)
     {
-        Node *newNode = createNode(name, age);
         newNode->next = r->head;
         r->head->prev = newNode;
         r->head = newNode;
         return;
     }
-    else if(strcmp(r->tail->name, name) < 0)
+    else if(strcmp(r->tail->name, name) >= 0)
     {
-        Node *newNode = createNode(name, age);
         newNode->prev = r->tail;
         r->tail->next = newNode;
         r->tail = newNode;
@@ -78,9 +79,8 @@ void insert(const char *name, const int age)
         Node *curr = r->head;
         while(curr)
         {
-            if(strcmp(curr->name, name) > 0)
+            if(strcmp(curr->name, name) >= 0)
             {
-                Node *newNode = createNode(name, age);
                 newNode->next = curr;
                 newNode->prev = curr->prev;
                 curr->prev->next = newNode;
@@ -118,7 +118,40 @@ void view()
 void deleteNode(const char *name)
 {
     int key = hashing(name);
+    Row *row = table[key];
+    if(!row)
+    {
+        printf("%s not found", name);
+        return;
+    }
 
+    if(strcmp(row->head->name,name) == 0)
+    {
+        row->head = row->head->next;
+        free(row->head->prev);
+        row->head->prev = NULL;
+    }
+    else if(strcmp(row->tail->name,name) == 0)
+    {
+        row->tail = row->tail->prev;
+        free(row->tail->next);
+        row->tail->next = NULL;
+    }
+    else
+    {
+        Node *curr = row->head;
+        while(curr)
+        {
+            if(strcmp(curr->name, name) == 0)
+            {
+                curr->prev->next = curr->next;
+                curr->next->prev = curr->prev;
+                free(curr);
+                return;
+            }
+            curr = curr->next;
+        }
+    }
 }
 
 int main()
@@ -126,10 +159,11 @@ int main()
     insert("Alvin", 10);
     insert("Anton", 18);
     insert("Budi", 19);
+    insert("Fredy", 20);
+    insert("Alek", 20);
+    insert("Kenji", 20);
 
-    deleteNode("Alvin");
-    deleteNode("Anton");
-    deleteNode("Budi");
+    deleteNode("Alek");
 
     view();
 
