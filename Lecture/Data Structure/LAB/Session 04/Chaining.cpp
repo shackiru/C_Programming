@@ -142,7 +142,14 @@ void deleteNode(const char *name)
         Node *curr = row->head;
         while(curr)
         {
-            if(strcmp(curr->name, name) == 0)
+            if(row->head == row->tail)
+            {
+                free(row->head);
+                row->head = row->tail = NULL;
+                free(table[key]);
+                table[key] = NULL;
+            }
+            else
             {
                 curr->prev->next = curr->next;
                 curr->next->prev = curr->prev;
@@ -163,8 +170,7 @@ int main()
     insert("Alek", 20);
     insert("Kenji", 20);
 
-    deleteNode("Alek");
-
+    deleteNode("Fredy");
     view();
 
     return 0;
