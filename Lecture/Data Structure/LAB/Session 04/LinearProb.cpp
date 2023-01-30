@@ -89,6 +89,7 @@ void deleteNode(const char *name)
     if(curr == key)
     {
         printf("%s not found\n", name);
+        return;
     }
 
     free(table[curr]);
@@ -101,8 +102,9 @@ int main()
     insert("Anton", 18);
     insert("Budi", 19);
 
-    deleteNode("Fredy");
+    deleteNode("Abel");
     deleteNode("Anton");
+    deleteNode("Budi");
 
     view();
 
