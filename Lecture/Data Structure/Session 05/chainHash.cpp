@@ -9,7 +9,7 @@ struct node
     struct node *next;
 }*hashTable[MAXSIZE];
 
-int hashing(char s[])
+int hashing(char s[])a
 {
     return s[0] - 'a';
 }
