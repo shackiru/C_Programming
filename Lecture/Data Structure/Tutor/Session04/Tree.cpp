@@ -13,6 +13,7 @@ void initTree()
         tree[i] = -1;
     }
 }
+
 int searchNode(int x)
 {
     int i;
@@ -25,6 +26,17 @@ int searchNode(int x)
     }
     return -1;
 }
+
+int isLeave(int x)
+{
+    int pos = searchNode(x);
+    if(tree[2 * pos + 1] == -1 && tree[2 * pos + 2] == -1)
+    {
+        return 1;
+    }
+    return 0;
+}
+
 
 void insert(int  x, int p, char child)
 {
@@ -41,12 +53,12 @@ void insert(int  x, int p, char child)
             if(child == '1')
             {
                 // left child
-                tree[pos + 1] = x;
+                tree[2 *pos + 1] = x;
             }
             else
             {
                 //right child
-                tree[pos + 2] = x;
+                tree[2 * pos + 2] = x;
             }
         }
     }
@@ -79,7 +91,8 @@ int main()
     scanf("%d", &x);
     insert(x, 3, 'l');
     printTree();
-
+    int check = isLeave(x);
+    printf("%d", check);
 
     return 0;    
 }
