@@ -70,7 +70,7 @@ void postfix(struct tnode *curr)
     printf("%c ", curr->c);
 }
 
-void postfix(struct tnode *curr)
+void infix(struct tnode *curr)
 {
     if(isOperator(curr->c))
     {
