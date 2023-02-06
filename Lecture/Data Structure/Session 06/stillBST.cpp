@@ -25,7 +25,7 @@ void insertNode(struct tnode *curr, int x)
     {
         root = newNode(x);
     }
-    else
+    else if(x != curr->val)
     {
         if(x < curr->val && curr->left == NULL)
         {   
@@ -94,6 +94,7 @@ int main()
 {
     int x;
     //scanf("%d", &x);
+    insertNode(root, 5);
     insertNode(root, 5);
     insertNode(root, 3);
     insertNode(root, 18);
