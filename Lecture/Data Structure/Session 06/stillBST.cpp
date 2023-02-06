@@ -49,11 +49,29 @@ void insertNode(struct tnode *curr, int x)
     }
 }
 
+void infix(struct tnode *curr)
+{
+    if(curr->left != NULL)
+    {
+        infix(curr->left);
+    }
+    printf("%d ", curr->val);
+    if(curr->right != NULL)
+    {
+        infix(curr->right);
+    }
+}
+
 int main()
 {
     int x;
     scanf("%d", &x);
-    insertNode(root , x);
+    insertNode(root , 5);
+    insertNode(root , 3);
+    insertNode(root , 18);
+    insertNode(root , 2);
+    insertNode(root , 4);
+    infix(root);
 
     return 0;
 }
