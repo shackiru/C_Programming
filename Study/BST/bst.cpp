@@ -45,7 +45,7 @@ struct node *insert(struct node *node, int key) {
 }
 
 // Find the inorder successor
-struct node *minValueNode(struct node *node) {
+struct node * minValueNode(struct node *node) {
   struct node *current = node;
 
   // Find the leftmost leaf
