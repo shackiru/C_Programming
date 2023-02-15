@@ -244,7 +244,7 @@ int main()
     printf("\n");
 
 
-    printf("Search Food: ");
+    printf("Search Food: ");    
     struct Food *toSearch = searchFood(root, "Bakso Sapi");
     if(toSearch == NULL)
     {
