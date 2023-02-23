@@ -10,7 +10,7 @@ struct Tree
     struct Tree * right;
 };
 
-char * convertToLowerCase(char * words)
+char * checkIsLower(char * words)
 {
     for(int i = 0; i < strlen(words); i++)
     {
@@ -19,7 +19,7 @@ char * convertToLowerCase(char * words)
             words[i] = tolower(words[i]);
         }
     }
-    return words;   
+    return words;
 }
 
 struct Tree * createNode(char * words)
@@ -41,15 +41,15 @@ int validateString(char * words)
         {
             return 1;
         }
+        return 0;
     }
-    return 0;
 }
 
 void printTree(struct Tree * curr)
 {
     if(curr->left == 0)
     {
-        printf("Data not found!\n");
+        printf("data not found!\n");
     }
     if(curr->left)
     {
@@ -66,7 +66,7 @@ struct Tree * insertNode(struct Tree * newNode, struct Tree * curr)
 {
     if(curr == NULL)
     {
-        return newNode;
+        return curr;
     }
     if(strcmpi(newNode->words, curr->words) < 0)
     {
@@ -83,13 +83,13 @@ struct Tree * deleteNode(struct Tree * curr, char * name)
 {
     if(curr == NULL)
     {
-        printf("Data not found!\n");
+        printf("data not found!\n");
     }
-    if(strcmpi(name, curr->words) < 0)
+    if(strcmpi(curr->words, name) < 0)
     {
         curr->left = deleteNode(curr->left, name);
     }
-    else if(strcmpi(name, curr->words) > 0)
+    else if(strcmpi(curr->words, name) > 0)
     {
         curr->right = deleteNode(curr->right, name);
     }
@@ -99,7 +99,7 @@ struct Tree * deleteNode(struct Tree * curr, char * name)
         {
             return NULL;
         }
-        if(curr->left == NULL)
+        else if(curr->left == NULL)
         {
             struct Tree * iter = curr->right;
             strcpy(curr->words, iter->words);
@@ -113,7 +113,7 @@ struct Tree * deleteNode(struct Tree * curr, char * name)
         }
         else
         {
-            struct Tree * iter = curr->left;
+            struct Tree *iter = curr->left;
             while(iter->right)
             {
                 iter = iter->right;
@@ -125,36 +125,34 @@ struct Tree * deleteNode(struct Tree * curr, char * name)
     return curr;
 }
 
-struct Tree * insertName(struct Tree * curr)
+struct Tree * newName(struct Tree * curr)
 {
     char name[10];
     int check = 1;
     do
     {
-        printf("input your name: ");
-        scanf("%s", name); getchar();
+        printf("Enter  your name: ");
+        scanf("%s", name);
         check = validateString(name);
     } while (check);
     curr = insertNode(curr, createNode(name));
-    printf("Words added success!\n");
-
+    printf("success");
     return curr;
-    
 }
 
-struct Tree * searchNode(struct Tree *curr, char * name)
+struct Tree * searchName(struct Tree * curr, char * name)
 {
     if(curr == NULL)
     {
-        printf("Data not found!\n");
+        printf("no data!");
     }
     if(strcmpi(curr->words, name) < 0)
     {
-        return searchNode(curr->left, name);
+        return searchName(curr->left, name);
     }
     else if(strcmpi(curr->words, name) > 0)
     {
-        return searchNode(curr->right, name);
+        return searchName(curr->right, name);
     }
     else
     {
@@ -169,70 +167,63 @@ struct Tree * deleteName(struct Tree * curr)
     int check = 1;
     do
     {
-        printf("Enter name to be searched: ");
-        scanf("%s", name); getchar();
+        printf("Enter your name: ");
+        scanf("%s", name);
         check = validateString(name);
-        if(check)
-        {
-            printf("Invalid search format!\n");
-        }
     } while (check);
-
-    if(searchNode(curr, name))
+    if(searchName(curr, name))
     {
         curr = deleteNode(curr, name);
-        printf("Deleted\n");
+        printf("delete success\n");
     }
     else
     {
-        printf("Data not found!\n");
+        printf("there is no data");
+    }
+}
+
+struct Tree * updateName(struct Tree * curr, char * name)
+{
+    if(curr == NULL)
+    {
+        return NULL;
+    }
+    if(strcmpi(name, curr->words) < 0)
+    {
+        curr->left = updateName(curr->left, name);
+    }
+    else if(strcmpi(name, curr->words) > 0)
+    {
+        curr->right = updateName(curr->right, name);
     }
     return curr;
 }
 
-void menu(struct Tree * root)
+int calculateTree(struct Tree * curr)
 {
-    int ch = 0;
-    do
+    if(curr == NULL)
     {
-        system("cls");
-        printf("1. Insert Node\n");
-        printf("2. Delete Node\n");
-        printf("3. Delete Node\n");
-        printf("4. Exit\n");
-        printf(">> ");
-        scanf("%d", &ch);
+        printf("no data\n");
+    }
+    int leftChild = calculateTree(curr->left) + 1;
+    int rightChild = calculateTree(curr->right) + 1;
+    if(leftChild >= rightChild)
+    {
+        return leftChild;
+    }
+    else
+    {
+        return rightChild;
+    }
+    return 0;
+}
 
-        switch(ch)
-        {
-            case 1:
-            {
-                root = insertName(root);
-                break;
-            }
-            case 2:
-            {
-                root = deleteName(root);
-                break;
-            }
-            case 3:
-            {
-                printTree(root);
-                break;
-            }
-            case 4:
-            {
-                printf("Thanks\n");
-                break;
-            }
-        }
-    } while (ch != 4);
+void menu(struct Tree * curr)
+{
     
 }
 
 int main()
 {
-    struct Tree *root;
-    menu(root);
     return 0;
 }
