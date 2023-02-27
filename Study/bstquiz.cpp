@@ -218,7 +218,7 @@ int calculateTree(struct Tree * curr)
     return 0;
 }
 
-void menu(struct Tree * curr)
+void menu(struct Tree * root)
 {
     
 }
