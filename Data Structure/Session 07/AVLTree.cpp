@@ -12,6 +12,7 @@ struct tnode
 };
 
 struct tnode * root = NULL;
+int delExist = 1;
 
 struct tnode * initNode(int val)
 {
@@ -164,6 +165,70 @@ struct tnode * insertNode(struct tnode * curr, int x)
     {
         curr->right = rotateRight(curr->right);
         return rotateLeft(curr);
+    }
+    return curr;
+}
+
+struct tnode * getMaxLeft(struct tnode * curr)
+{
+    struct tnode * iter = curr->left;
+    while(iter->right)
+    {
+        iter = iter->right;
+    }
+    return iter;
+}
+
+struct tnode * delNode(struct tnode * curr, int x)
+{
+    if(curr == NULL)
+    {
+        delExist = 0;
+        return NULL;
+    }
+    if(x < curr->value)
+    {
+        curr->left = delNode(curr->left, x);
+    }
+    else if(x > curr->value)
+    {
+        curr->right = delNode(curr->right, x);
+    }
+    else
+    {
+        if(curr->left == NULL && curr->right == NULL)
+        {
+            free(curr);
+            return NULL;
+        }
+        else if(curr->left == NULL)
+        {
+            return curr->right;
+        }
+        else if(curr->right == NULL)
+        {
+            return curr->left;
+        }
+        else
+        {
+            struct tnode * temp = getMaxLeft(curr);
+            curr->value = temp->value;
+            curr->left = delNode(curr->left, temp->value);
+        }
+    }
+    curr->height = updateHeight(curr);
+    if(height(curr->left) - height(curr->left) > 1 && height(curr->left) - height(curr->right) < 0)
+    {
+        curr->left = rotateLeft(curr->left);
+        return rotateLeft(curr);
+    }
+    else if(height(curr->left) - height(curr->right) > 1)
+    {
+
+    }
+    else if(height(curr->left) - height(curr->right) < -1)
+    {
+        
     }
     return curr;
 }
