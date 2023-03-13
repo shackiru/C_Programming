@@ -146,7 +146,7 @@ Food * insertFood(Food * root, const char *name, int price)
     return root;
 }
 
-Food * updateFood(Food * root, int price, const char * newName)
+Food * updateFood(Food * root, const char * newName, int price)
 {
     if(root == NULL)
     {
@@ -157,18 +157,18 @@ Food * updateFood(Food * root, int price, const char * newName)
     // kalau data yang dicari lebih kecil
     else if(price < root->price)
     {
-        root->leftChild = updateFood(root->leftChild, price, newName);
+        root->leftChild = updateFood(root->leftChild, newName, price);
     }
     //kalau data yang dicari lebih besar
     else if(price > root->price)
     {
-        root->rightChild = updateFood(root->rightChild, price, newName);
+        root->rightChild = updateFood(root->rightChild, newName, price);
     }
     //kalau data udah ketemu
     else
     {
         strcpy(root->name, newName);
-        printf("Successfullt updated!\n");
+        printf("Successfully updated!\n");
     }
     return root;
 }
@@ -196,6 +196,10 @@ int main()
     root = insertFood(root, "ubi ball", 10000);
     root = insertFood(root, "beng beng", 8000);
 
+    inOrder(root);
+
+    root = updateFood(root, "makanan", 20000);
+    printf("\nAfter update: \n");
     inOrder(root);
 
     return 0;
