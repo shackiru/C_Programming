@@ -63,6 +63,34 @@ int getBalance(Food * node)
     }
 }
 
+Food * rightRotate(Food * node)
+{
+    Food * newParent = node->leftChild;
+    node->leftChild = newParent->rightChild;
+
+    newParent->rightChild = node;
+    
+    //update Height
+    node->height = getHeight(node);
+    newParent->height = getHeight(newParent);
+
+    return newParent;
+}   
+
+Food * leftRotate(Food * node)
+{
+    Food * newParent = node->rightChild;
+    node->rightChild = newParent->leftChild;
+
+    newParent->leftChild = node;
+
+    //update Height
+    node->height = getHeight(node);
+    newParent->height = getHeight(newParent);
+
+    return newParent;
+}
+
 Food * insertFood(Food * root, const char *name, int price)
 {
     //kalau rootnya tidak ada (root == NULL)
@@ -95,23 +123,54 @@ Food * insertFood(Food * root, const char *name, int price)
         if(price > root->price)
         {
             //left rotate dulu
+            root->leftChild = leftRotate(root->leftChild);
 
         }
         //kalau price < root->price
         // right rotate
+        return rightRotate(root);
     }
     // berat ke kanan (balance < -1)
     else if(balance < -1)
     {
-        
+        if(price < root->price)
+        {
+            //right rotate dulu
+            root->rightChild = rightRotate(root->rightChild);
+        }
+        //kalau price > root-price
+        //left rotate
+        return leftRotate(root);
     }
 
     return root;
 }
 
-Food * updateFood()
+Food * updateFood(Food * root, int price, const char * newName)
 {
-    
+    if(root == NULL)
+    {
+        //datanya tidak ketemu
+        printf("Data not found!\n");
+        return root;
+    }
+    // kalau data yang dicari lebih kecil
+    else if(price < root->price)
+    {
+        root->leftChild = updateFood(root->leftChild, price, newName);
+    }
+    //kalau data yang dicari lebih besar
+    else if(price > root->price)
+    {
+        root->rightChild = updateFood(root->rightChild, price, newName);
+    }
+    //kalau data udah ketemu
+    else
+    {
+        strcpy(root->name, newName);
+        printf("Successfullt updated!\n");
+    }
+    return root;
 }
 
 void inOrder(Food * node)
@@ -121,7 +180,7 @@ void inOrder(Food * node)
         return;
     }
     inOrder(node->leftChild);
-    printf("name: %s\t | \tprice: %d \t| height: %d\n", node->name, node->price, node->height);
+    printf("name: %s\t | \tprice: %d \t| height: %d \t| balance: %d \n", node->name, node->price, node->height, getBalance(node));
     inOrder(node->rightChild);
 
     return;
