@@ -10,7 +10,7 @@
                 "UNICODE",
                 "_UNICODE"
             ],
-            "compilerPath": "C:/Users/bcamaster/Downloads/C Config/mingw64/bin/gcc.exe",
+            "compilerPath": "C:\\Users\\bcamaster\\Downloads\\Setup\\C Config\\mingw64\\bin\\gcc.exe",
             "cStandard": "gnu17",
             "cppStandard": "gnu++14",
             "intelliSenseMode": "windows-gcc-x64"

@@ -317,7 +317,7 @@ Game * updateMenu(Game * node)
     if(toDelete == NULL)
     {
         printf("Not found\n");
-        return node;
+        return node;   
     }
 
     char opt[100];
